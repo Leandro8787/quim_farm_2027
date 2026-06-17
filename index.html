@@ -4180,7 +4180,15 @@ const justifications = {
 };;
 
 
-function setupDisciplineSelectors() {
+function init() {
+        setupDisciplineSelectors();
+        renderMalla();
+        renderMatrix();
+        updateCoverageWidgets();
+        renderAccordion();
+    }
+
+    function setupDisciplineSelectors() {
         const buttons = document.querySelectorAll('.discipline-btn');
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
