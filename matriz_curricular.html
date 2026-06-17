@@ -1,0 +1,5367 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Matriz Curricular - Sello Instrumental y Farmacia 2027 (UPLA)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+    <style>
+
+        :root {
+            /* Graphic standard color codes */
+            --upla-cyan: #00a1de;        /* 100% Cyan */
+            --upla-cyan-70: #00b2e7;     /* 70% Cyan */
+            --upla-cyan-50: #58c7ee;     /* 50% Cyan */
+            --upla-cyan-30: #a0daf5;     /* 30% Cyan */
+            --upla-cyan-10: #d3edfb;     /* 10% Cyan */
+            --upla-cyan-pale: #eaf7fd;   /* 5% Cyan */
+            
+            --upla-black: #000000;       /* 100% Negro */
+            --upla-black-70: #575756;    /* 70% Negro */
+            --upla-black-50: #878787;    /* 50% Negro */
+            --upla-black-30: #b2b2b2;    /* 30% Negro */
+            --upla-black-10: #dadada;    /* 10% Negro */
+            --upla-black-pale: #ededed;  /* 5% Negro */
+
+            /* Cyan + Negro Mixtures from color_upla.png */
+            --upla-mix-80-20: #0093b5;   /* 80% Cyan + 20% Black */
+            --upla-mix-70-30: #0184a3;   /* 70% Cyan + 30% Black */
+            --upla-mix-60-40: #01758f;   /* 60% Cyan + 40% Black */
+            --upla-mix-50-50: #00657c;   /* 50% Cyan + 50% Black */
+            --upla-mix-40-60: #005366;   /* 40% Cyan + 60% Black */
+            --upla-mix-30-70: #004150;   /* 30% Cyan + 70% Black */
+            --upla-mix-20-80: #002c38;   /* 20% Cyan + 80% Black */
+
+            /* UI Mapping variables */
+            --bg-main: var(--upla-black-pale);
+            --bg-card: #ffffff;
+            --bg-card-hover: var(--upla-cyan-pale);
+            --border-color: var(--upla-black-10);
+            --border-hover: var(--upla-cyan);
+            
+            --text-primary: var(--upla-mix-20-80);
+            --text-secondary: var(--upla-mix-30-70);
+            --text-muted: var(--upla-black-70);
+
+            /* DISTINCT COLORS FOR STANDARDS (Disciplinar, Sello Instrumental, Sello UPLA) */
+            --color-bio: #2e7d32;        /* Verde para Disciplinar */
+            --color-bio-glow: rgba(46, 125, 50, 0.08);
+            --color-qui: #d97706;        /* Amarillo/Ámbar para Sello Instrumental */
+            --color-qui-glow: rgba(217, 119, 6, 0.08);
+            --color-fis: #1d4ed8;        /* Azul para Sello UPLA */
+            --color-fis-glow: rgba(29, 78, 216, 0.08);
+            
+            /* CARD BORDERS AND LEGEND COLORS FROM colores.png */
+            --color-instrumental: #ccc0d9; /* Pastel Purple */
+            --color-practicas: #92d050;    /* Pastel Green */
+            --color-cierre: #b8cce4;       /* Pastel Blue/Grey */
+            --color-pedagogica: #dbadd1;   /* Pastel Pink */
+            --color-basicas-bq: #ffff89;   /* Pastel Yellow */
+            --color-basicas-fa: #b8cce4;   /* Pastel Blue/Grey */
+            --color-sello: #fabf8f;        /* Pastel Orange */
+            
+            --transition-speed: 0.25s;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+        * {
+
+            box-sizing: border-box;
+
+            margin: 0;
+
+            padding: 0;
+
+            font-family: 'Lato', sans-serif;
+
+        }
+
+
+
+        body {
+
+            background-color: var(--bg-main);
+
+            color: var(--text-primary);
+
+            min-height: 100vh;
+
+            overflow-y: auto;
+
+            overflow-x: hidden;
+
+            padding: 2.5rem 2rem;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 1.75rem;
+
+        }
+
+
+
+        h1, h2, h3, h4, h5 {
+
+            font-family: 'Lato', sans-serif;
+
+            font-weight: 700;
+
+        }
+
+
+
+        .container {
+
+            max-width: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 1.75rem;
+
+        }
+
+
+
+        /* Header Style */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2.25rem;
+            background: #ffffff; /* Solid White header background */
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            border-top: 5px solid var(--upla-cyan); /* Solid Cyan top border accent */
+            box-shadow: var(--shadow-sm);
+            color: var(--text-primary);
+        }
+
+
+
+        .header-title-container h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.35rem;
+            font-weight: 800;
+            color: var(--upla-cyan); /* Solid Cyan */
+            text-transform: uppercase;
+        }
+
+
+
+        .header-title-container p {
+
+            color: #94a3b8;
+
+            font-size: 0.95rem;
+
+        }
+
+
+
+        .header-badges {
+
+            display: flex;
+
+            gap: 0.75rem;
+
+        }
+
+
+
+        .badge {
+
+            background: rgba(255, 255, 255, 0.08);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            padding: 0.5rem 1.1rem;
+
+            border-radius: 9999px;
+
+            font-size: 0.82rem;
+
+            font-weight: 600;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+            color: #e2e8f0;
+
+            transition: all 0.2s;
+
+        }
+
+
+
+        .badge.active {
+            background: var(--upla-cyan-10);
+            border-color: var(--upla-cyan);
+            color: var(--upla-cyan);
+        }
+
+
+
+        .badge-sct {
+            background: var(--upla-black-pale);
+            border-color: var(--upla-black-30);
+            color: var(--upla-black-70);
+        }
+
+
+
+        /* Premium Interactive Guide Onboarding */
+
+        .guide-panel {
+
+            background: #ffffff;
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 16px;
+
+            padding: 1.75rem;
+
+            box-shadow: var(--shadow-md);
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 1.25rem;
+
+        }
+
+
+
+        .guide-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.75rem;
+
+            border-bottom: 1px solid var(--border-color);
+
+            padding-bottom: 0.75rem;
+
+        }
+
+
+
+        .guide-header h3 {
+
+            font-size: 1.25rem;
+
+            color: var(--text-primary);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+        }
+
+
+
+        .guide-subtitle {
+
+            font-size: 0.9rem;
+
+            color: var(--text-secondary);
+
+            line-height: 1.5;
+
+        }
+
+
+
+        .guide-steps {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+
+            gap: 1.25rem;
+
+        }
+
+
+
+        .guide-step-card {
+
+            background: #f8fafc;
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 12px;
+
+            padding: 1.25rem;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 0.75rem;
+
+            transition: all 0.3s ease;
+
+            position: relative;
+
+        }
+
+
+
+        .guide-step-card:hover {
+            border-color: var(--upla-cyan);
+            background: var(--upla-cyan-pale);
+        }
+
+
+
+        .guide-step-badge {
+
+            background: var(--text-primary);
+
+            color: #ffffff;
+
+            width: 24px;
+
+            height: 24px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 0.85rem;
+
+            font-weight: 800;
+
+        }
+
+
+
+        .guide-step-card.step-active-bio .guide-step-badge { background: var(--color-bio); }
+
+        .guide-step-card.step-active-qui .guide-step-badge { background: var(--color-qui); }
+
+        .guide-step-card.step-active-fis .guide-step-badge { background: var(--color-fis); }
+
+
+
+        .guide-step-title {
+
+            font-size: 0.9rem;
+
+            font-weight: 700;
+
+            color: var(--text-primary);
+
+        }
+
+
+
+        .guide-step-desc {
+
+            font-size: 0.82rem;
+
+            color: var(--text-secondary);
+
+            line-height: 1.45;
+
+        }
+
+
+
+        /* Stats Section */
+
+        .stats-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+            gap: 1.25rem;
+
+        }
+
+
+
+        .stat-card {
+
+            background: var(--bg-card);
+
+            border-radius: 16px;
+
+            border: 1px solid var(--border-color);
+
+            padding: 1.5rem;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            box-shadow: var(--shadow-sm);
+
+        }
+
+
+
+        .stat-card.clickable {
+
+            cursor: pointer;
+
+            position: relative;
+
+        }
+
+
+
+        .stat-card.clickable::after {
+
+            content: 'Ver Detalles 🔍';
+
+            position: absolute;
+
+            bottom: 6px;
+
+            right: 16px;
+
+            font-size: 0.7rem;
+
+            font-weight: 600;
+
+            color: var(--text-muted);
+
+            opacity: 0;
+
+            transition: opacity 0.2s;
+
+        }
+
+
+
+        .stat-card.clickable:hover::after {
+
+            opacity: 1;
+
+        }
+
+
+
+        .stat-card.clickable:hover {
+            border-color: var(--upla-cyan);
+            box-shadow: var(--shadow-sm);
+        }
+
+
+
+        .stat-info h3 {
+
+            font-size: 0.85rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.05em;
+
+            color: var(--text-muted);
+
+            margin-bottom: 0.4rem;
+
+            font-weight: 700;
+
+        }
+
+
+
+        .stat-info p {
+
+            font-size: 2.1rem;
+
+            font-weight: 800;
+
+            font-family: 'Lato', sans-serif;
+
+            color: var(--text-primary);
+
+        }
+
+
+
+        .stat-icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f1f5f9;
+
+            color: var(--text-secondary);
+
+        }
+
+
+
+        /* Controls Panel */
+
+        .controls-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            background: var(--bg-card);
+
+            border-radius: 16px;
+
+            border: 1px solid var(--border-color);
+
+            padding: 0.8rem 1.5rem;
+
+            gap: 1.25rem;
+
+            box-shadow: var(--shadow-sm);
+
+        }
+
+
+
+        .selector-group {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 1rem;
+
+        }
+
+
+
+        .selector-label {
+
+            font-size: 0.85rem;
+
+            font-weight: 800;
+
+            color: var(--text-secondary);
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.03em;
+
+        }
+
+
+
+        .discipline-selector {
+
+            display: flex;
+
+            background: #f1f5f9;
+
+            padding: 0.25rem;
+
+            border-radius: 10px;
+
+            border: 1px solid var(--border-color);
+
+        }
+
+
+
+        .discipline-btn {
+
+            background: transparent;
+
+            border: none;
+
+            color: var(--text-secondary);
+
+            padding: 0.6rem 1.75rem;
+
+            font-size: 0.95rem;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            border-radius: 8px;
+
+            transition: all var(--transition-speed);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+        }
+
+
+
+        .discipline-btn:hover {
+
+            color: var(--text-primary);
+
+        }
+
+
+
+        .discipline-btn.active[data-discipline="disciplinares"] {
+
+            background: var(--color-bio);
+
+            color: #ffffff;
+
+            box-shadow: 0 4px 6px -1px rgba(0, 161, 222, 0.2);
+
+        }
+
+
+
+        .discipline-btn.active[data-discipline="instrumentales"] {
+
+            background: var(--color-qui);
+
+            color: #ffffff;
+
+            box-shadow: 0 4px 6px -1px rgba(0, 101, 124, 0.2);
+
+        }
+
+
+
+        .discipline-btn.active[data-discipline="selloupla"] {
+
+            background: var(--color-fis);
+
+            color: #ffffff;
+
+            box-shadow: 0 4px 6px -1px rgba(0, 44, 56, 0.2);
+
+        }
+
+
+
+        /* Dashboard Panels */
+
+        .panel {
+
+            background: var(--bg-card);
+
+            border-radius: 16px;
+
+            border: 1px solid var(--border-color);
+
+            padding: 1.75rem;
+
+            box-shadow: var(--shadow-md);
+
+            display: flex;
+
+            flex-direction: column;
+
+            overflow: hidden;
+
+            transition: box-shadow 0.3s ease;
+
+        }
+
+
+
+        .panel:hover {
+
+            box-shadow: var(--shadow-lg);
+
+        }
+
+
+
+        .panel-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 1.25rem;
+
+            padding-bottom: 0.75rem;
+
+            border-bottom: 1px solid var(--border-color);
+
+        }
+
+
+
+        .panel-title {
+
+            font-size: 1.3rem;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.75rem;
+
+            color: var(--text-primary);
+
+        }
+
+
+
+        .panel-subtitle {
+
+            font-size: 0.85rem;
+
+            color: var(--text-secondary);
+
+            margin-top: 0.2rem;
+
+        }
+
+
+
+        /* Coverage Gauge Panel */
+
+        .calc-grid {
+
+            display: grid;
+
+            grid-template-columns: 1.4fr 2.6fr;
+
+            gap: 1.75rem;
+
+        }
+
+
+
+        @media (max-width: 1024px) {
+
+            .calc-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+
+        .progress-container {
+
+            background: #ffffff;
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 12px;
+
+            padding: 1.5rem;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            gap: 1.2rem;
+
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.01);
+
+        }
+
+
+
+        .progress-label-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 0.95rem;
+
+            font-weight: 800;
+
+        }
+
+
+
+        .progress-track {
+
+            height: 20px;
+
+            background: #e2e8f0;
+
+            border-radius: 9999px;
+
+            position: relative;
+
+            margin-top: 1.5rem;
+
+        }
+
+
+
+        .progress-bar-fill {
+
+            height: 100%;
+
+            border-radius: 9999px;
+
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+            position: relative;
+
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+
+        }
+
+
+
+        .progress-threshold-marker {
+            position: absolute;
+            top: -6px;
+            bottom: -6px;
+            width: 4px;
+            background: var(--upla-black);
+            left: 80%;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+
+
+        .progress-threshold-label {
+            position: absolute;
+            top: -28px;
+            left: 80%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: #ffffff;
+            background: var(--upla-black);
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            white-space: nowrap;
+            border: 1px solid var(--upla-black);
+            box-shadow: var(--shadow-sm);
+            z-index: 10;
+        }
+
+
+
+        .calc-steps {
+
+            background: #ffffff;
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 12px;
+
+            padding: 1.5rem;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            gap: 1rem;
+
+        }
+
+
+
+        .calc-steps-title {
+
+            font-size: 0.9rem;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            color: var(--text-muted);
+
+            border-bottom: 1px solid var(--border-color);
+
+            padding-bottom: 0.5rem;
+
+            letter-spacing: 0.05em;
+
+        }
+
+
+
+        .steps-container {
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 1rem;
+
+        }
+
+
+
+        @media (max-width: 640px) {
+
+            .steps-container {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+
+        .step-box {
+
+            background: #f8fafc;
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 12px;
+
+            padding: 1.2rem 0.8rem;
+
+            text-align: center;
+
+            box-shadow: var(--shadow-sm);
+
+            transition: all var(--transition-speed);
+
+        }
+
+
+
+        .step-box:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow: var(--shadow-md);
+
+            background: #ffffff;
+
+        }
+
+
+
+        .step-val {
+
+            font-size: 1.5rem;
+
+            font-weight: 800;
+
+            color: var(--text-primary);
+
+            margin-bottom: 0.25rem;
+
+            font-family: 'Lato', sans-serif;
+
+        }
+
+
+
+        .step-lbl {
+
+            font-size: 0.72rem;
+
+            color: var(--text-secondary);
+
+            line-height: 1.3;
+
+            font-weight: 700;
+
+        }
+
+
+
+        .step-helper {
+
+            font-size: 0.62rem;
+
+            color: var(--text-muted);
+
+            margin-top: 0.3rem;
+
+            display: block;
+
+        }
+
+
+
+        /* Legend styles */
+
+        .legend-container {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 0.8rem 1.2rem;
+
+            margin-bottom: 1.25rem;
+
+            padding: 1rem 1.25rem;
+
+            background: #f8fafc;
+
+            border-radius: 12px;
+
+            border: 1px solid var(--border-color);
+
+        }
+
+
+
+        .legend-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.6rem;
+
+            font-size: 0.82rem;
+
+            font-weight: 600;
+
+            color: var(--text-secondary);
+
+        }
+
+
+
+        .legend-color {
+
+            width: 13px;
+
+            height: 13px;
+
+            border-radius: 4px;
+
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+
+        }
+
+
+
+        /* Malla Horizontal Scroller */
+
+        .malla-scroller {
+
+            overflow-x: auto;
+
+            padding-bottom: 1.2rem;
+
+        }
+
+
+
+        /* Thin modern scrollbars */
+
+        .malla-scroller::-webkit-scrollbar {
+
+            height: 8px;
+
+        }
+
+        .malla-scroller::-webkit-scrollbar-track {
+
+            background: #f1f5f9;
+
+            border-radius: 4px;
+
+        }
+
+        .malla-scroller::-webkit-scrollbar-thumb {
+
+            background: #cbd5e1;
+
+            border-radius: 4px;
+
+        }
+
+        .malla-scroller::-webkit-scrollbar-thumb:hover {
+
+            background: #94a3b8;
+
+        }
+
+
+
+        .malla-grid {
+            display: flex;
+            gap: 1rem;
+            position: relative;
+            align-items: stretch;
+            padding-bottom: 3.8rem;
+        }
+
+        .sem-column {
+            flex: 1 0 185px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .malla-divider {
+            position: relative;
+            width: 2px;
+            flex: 0 0 2px;
+            margin: 0 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .divider-line {
+            width: 0;
+            height: 100%;
+            border-left: 2.5px dashed var(--upla-cyan);
+            opacity: 0.75;
+        }
+
+        .divider-label {
+            position: absolute;
+            bottom: -3.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: var(--upla-mix-20-80);
+            text-align: center;
+            background: #ffffff;
+            padding: 0.3rem 0.6rem;
+            border: 1.5px solid var(--upla-cyan);
+            border-radius: 6px;
+            box-shadow: var(--shadow-md);
+            z-index: 10;
+            line-height: 1.2;
+        }
+
+
+
+        .sem-header {
+
+            text-align: center;
+
+            padding: 0.6rem 0.5rem;
+
+            background: #e2e8f0;
+
+            border-radius: 10px;
+
+            font-weight: 800;
+
+            font-size: 0.85rem;
+
+            border: 1px solid var(--border-color);
+
+            letter-spacing: 0.05em;
+
+            text-transform: uppercase;
+
+            color: var(--text-primary);
+
+            box-shadow: var(--shadow-sm);
+
+        }
+
+
+
+        /* 3D Flip Card design */
+
+        .course-card-container {
+
+            perspective: 1000px;
+
+            height: 125px;
+
+            width: 100%;
+
+        }
+
+
+
+        .course-card {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 100%;
+
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+            transform-style: preserve-3d;
+
+            cursor: pointer;
+
+        }
+
+
+
+        .course-card.flipped {
+
+            transform: rotateY(180deg);
+
+        }
+
+
+
+        .card-front, .card-back {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            backface-visibility: hidden;
+
+            border-radius: 12px;
+
+            border: 1px solid var(--border-color);
+
+            padding: 1rem 0.8rem;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            background: #ffffff;
+
+            box-shadow: var(--shadow-sm);
+
+            transition: all var(--transition-speed);
+
+        }
+
+
+
+        .card-front::before {
+
+            content: '';
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 6px;
+
+            height: 100%;
+
+            border-top-left-radius: 11px;
+
+            border-bottom-left-radius: 11px;
+
+            background: transparent;
+
+        }
+
+
+
+        .card-front::after {
+
+            content: '↻';
+
+            position: absolute;
+
+            top: 6px;
+
+            right: 8px;
+
+            font-size: 0.72rem;
+
+            color: var(--text-muted);
+
+            opacity: 0.5;
+
+            transition: opacity 0.2s;
+
+        }
+
+
+
+        .course-card:hover .card-front::after {
+
+            opacity: 1;
+
+        }
+
+
+
+        /* Course axes coloring */
+
+        .course-card-container.area-instrumental .card-front::before { background: var(--color-instrumental); }
+
+        .course-card-container.area-practicas .card-front::before { background: var(--color-practicas); }
+
+        .course-card-container.area-cierre .card-front::before { background: var(--color-cierre); }
+
+        .course-card-container.area-pedagogica .card-front::before { background: var(--color-pedagogica); }
+
+        .course-card-container.area-basicas_bq .card-front::before { background: var(--color-basicas-bq); }
+
+        .course-card-container.area-basicas_fa .card-front::before { background: var(--color-basicas-fa); }
+
+        .course-card-container.area-sello .card-front::before { background: var(--color-sello); }
+
+
+
+        .course-card:hover .card-front {
+
+            border-color: var(--border-hover);
+
+            transform: translateY(-2px);
+
+            box-shadow: var(--shadow-md);
+
+        }
+
+
+
+        .course-name {
+
+            font-size: 0.8rem;
+
+            font-weight: 700;
+
+            line-height: 1.4;
+
+            color: var(--text-primary);
+
+            display: -webkit-box;
+
+            -webkit-line-clamp: 3;
+
+            -webkit-box-orient: vertical;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            padding-right: 8px;
+
+        }
+
+
+
+        .course-footer {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            font-size: 0.72rem;
+
+            color: var(--text-secondary);
+
+            border-top: 1px solid #f1f5f9;
+
+            padding-top: 0.4rem;
+
+        }
+
+
+
+        .course-sct {
+
+            font-weight: 700;
+
+            background: #f1f5f9;
+
+            padding: 0.15rem 0.4rem;
+
+            border-radius: 4px;
+
+            font-size: 0.68rem;
+
+            color: var(--text-secondary);
+
+        }
+
+
+
+        /* Back Card */
+
+        .card-back {
+
+            transform: rotateY(180deg);
+
+            background: #f8fafc;
+
+            overflow-y: auto;
+
+            justify-content: flex-start;
+
+            gap: 0.35rem;
+
+            padding: 0.6rem;
+
+            border-radius: 12px;
+
+        }
+
+
+
+        .card-back::-webkit-scrollbar {
+
+            width: 4px;
+
+        }
+
+        .card-back::-webkit-scrollbar-thumb {
+
+            background: #cbd5e1;
+
+            border-radius: 2px;
+
+        }
+
+
+
+        .back-title {
+
+            font-size: 0.68rem;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            color: var(--text-muted);
+
+            border-bottom: 1px solid var(--border-color);
+
+            padding-bottom: 0.3rem;
+
+            margin-bottom: 0.3rem;
+
+            letter-spacing: 0.05em;
+
+        }
+
+
+
+        .back-item {
+
+            font-size: 0.68rem;
+
+            line-height: 1.3;
+
+            color: var(--text-primary);
+
+            padding: 0.25rem 0.4rem;
+
+            border-radius: 6px;
+
+            background: #ffffff;
+
+            border: 1px solid #e2e8f0;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+                .back-item-bio {
+            border-color: var(--color-bio) !important;
+            background-color: var(--color-bio) !important;
+            color: #ffffff !important;
+        }
+
+        .back-item-qui {
+            border-color: var(--color-qui) !important;
+            background-color: var(--color-qui) !important;
+            color: #ffffff !important;
+        }
+
+        .back-item-fis {
+            border-color: var(--color-fis) !important;
+            background-color: var(--color-fis) !important;
+            color: #ffffff !important;
+        }
+
+
+
+        .back-item.empty {
+
+            color: var(--text-muted);
+
+            border: none;
+
+            background: transparent;
+
+            text-align: center;
+
+            display: block;
+
+            margin-top: 1.2rem;
+
+            font-weight: 600;
+
+        }
+
+
+
+        .sem-sum {
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--text-secondary);
+            padding: 0.6rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px dashed var(--border-color);
+            margin-top: auto;
+        }
+
+
+
+        /* Collapsible Accordion below Malla */
+
+        .accordion-panel {
+
+            background: var(--bg-card);
+
+            border-radius: 16px;
+
+            border: 1px solid var(--border-color);
+
+            padding: 1.75rem;
+
+            box-shadow: var(--shadow-md);
+
+            margin-top: 0.5rem;
+
+        }
+
+
+
+        /* Inner Accordion Tabs */
+
+        .accordion-tab-container {
+
+            display: flex;
+
+            gap: 0.5rem;
+
+            margin-bottom: 1.25rem;
+
+            background: #f1f5f9;
+
+            padding: 0.3rem;
+
+            border-radius: 10px;
+
+            align-self: flex-start;
+
+            border: 1px solid var(--border-color);
+
+            max-width: fit-content;
+
+        }
+
+
+
+        .accordion-tab {
+
+            background: transparent;
+
+            border: none;
+
+            color: var(--text-secondary);
+
+            padding: 0.5rem 1.25rem;
+
+            font-size: 0.85rem;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            border-radius: 8px;
+
+            transition: all var(--transition-speed);
+
+        }
+
+
+
+        .accordion-tab:hover {
+
+            color: var(--text-primary);
+
+        }
+
+
+
+        .accordion-tab.active[data-tab="disciplinares"] {
+
+            background: var(--color-bio);
+
+            color: #ffffff;
+
+        }
+
+
+
+        .accordion-tab.active[data-tab="instrumentales"] {
+
+            background: var(--color-qui);
+
+            color: #ffffff;
+
+        }
+
+
+
+        .accordion-tab.active[data-tab="selloupla"] {
+
+            background: var(--color-fis);
+
+            color: #ffffff;
+
+        }
+
+
+
+        .accordion-container {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 0.75rem;
+
+        }
+
+
+
+        .accordion-item {
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            background: #ffffff;
+
+            box-shadow: var(--shadow-sm);
+
+            transition: all var(--transition-speed);
+
+        }
+
+
+
+        .accordion-item:hover {
+
+            border-color: var(--border-hover);
+
+            box-shadow: var(--shadow-md);
+
+        }
+
+
+
+        .accordion-header {
+
+            padding: 1.1rem 1.5rem;
+
+            background: #f8fafc;
+
+            cursor: pointer;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            font-weight: 700;
+
+            font-size: 0.95rem;
+
+            transition: background var(--transition-speed);
+
+            user-select: none;
+
+            border-bottom: 1px solid transparent;
+
+        }
+
+
+
+        .accordion-item.open .accordion-header {
+
+            background: #f1f5f9;
+
+            border-bottom-color: var(--border-color);
+
+        }
+
+
+
+        .accordion-header-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.8rem;
+
+        }
+
+
+
+        .accordion-icon {
+
+            font-size: 0.85rem;
+
+            transition: transform var(--transition-speed);
+
+            color: var(--text-secondary);
+
+        }
+
+
+
+        .accordion-item.open .accordion-icon {
+
+            transform: rotate(90deg);
+
+        }
+
+
+
+        .accordion-content {
+
+            display: none;
+
+            padding: 1.5rem;
+
+            background: #ffffff;
+
+            font-size: 0.88rem;
+
+            line-height: 1.5;
+
+        }
+
+
+
+        .accordion-item.open .accordion-content {
+
+            display: block;
+
+        }
+
+
+
+        .accordion-desc-box {
+
+            background: #f8fafc;
+
+            padding: 1rem 1.25rem;
+
+            border-radius: 8px;
+
+            margin-bottom: 1.25rem;
+
+            border-left: 4px solid #64748b;
+
+            font-size: 0.85rem;
+
+            color: var(--text-secondary);
+
+            line-height: 1.5;
+
+        }
+
+
+
+        .accordion-courses-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 0.75rem;
+
+        }
+
+
+
+        .accordion-course-row {
+
+            display: grid;
+
+            grid-template-columns: 280px 1fr;
+
+            gap: 1.25rem;
+
+            padding: 0.8rem 1rem;
+
+            background: #ffffff;
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 8px;
+
+            align-items: center;
+
+            transition: all var(--transition-speed);
+
+        }
+
+
+
+        .accordion-course-row:hover {
+
+            border-color: var(--border-hover);
+
+            box-shadow: var(--shadow-sm);
+
+            transform: translateX(3px);
+
+        }
+
+
+
+        @media (max-width: 768px) {
+
+            .accordion-course-row {
+
+                grid-template-columns: 1fr;
+
+                gap: 0.5rem;
+
+            }
+
+        }
+
+
+
+        .accordion-course-name {
+
+            font-weight: 700;
+
+            font-size: 0.82rem;
+
+            color: var(--text-primary);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+        }
+
+
+
+        .accordion-course-why {
+
+            font-size: 0.82rem;
+
+            color: var(--text-secondary);
+
+            line-height: 1.45;
+
+        }
+
+
+
+        /* Matrix Cross Section */
+
+        .matrix-section {
+
+            display: grid;
+
+            grid-template-columns: 2.8fr 1.2fr;
+
+            gap: 1.75rem;
+
+            align-items: start;
+
+        }
+
+
+
+        @media (max-width: 1200px) {
+
+            .matrix-section {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+
+        .matrix-left {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+
+        .matrix-container {
+
+            overflow-x: auto;
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 12px;
+
+            box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.01);
+
+        }
+
+
+
+        .matrix-table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            text-align: left;
+
+        }
+
+
+
+        .matrix-table th, .matrix-table td {
+
+            padding: 0.9rem 1.1rem;
+
+            border-bottom: 1px solid var(--border-color);
+
+            font-size: 0.82rem;
+
+        }
+
+
+
+        .matrix-table th {
+
+            font-family: 'Lato', sans-serif;
+
+            font-weight: 700;
+
+            color: var(--text-secondary);
+
+            text-transform: uppercase;
+
+            font-size: 0.72rem;
+
+            letter-spacing: 0.05em;
+
+            background: #f8fafc;
+
+        }
+
+
+
+        .matrix-row {
+
+            transition: background 0.15s ease;
+
+        }
+
+
+
+        .matrix-row:hover {
+
+            background: #f8fafc;
+
+        }
+
+
+
+        .matrix-row.highlighted {
+
+            background: #f1f5f9;
+
+        }
+
+
+
+        .standard-id-col {
+
+            font-weight: 800;
+
+            font-size: 0.95rem;
+
+            white-space: nowrap;
+
+        }
+
+
+
+        .disciplinares-std .standard-id-col { color: var(--color-bio); }
+
+        .instrumentales-std .standard-id-col { color: var(--color-qui); }
+
+        .selloupla-std .standard-id-col { color: var(--color-fis); }
+
+
+
+        .standard-desc-col {
+
+            max-width: 300px;
+
+            line-height: 1.45;
+
+            color: var(--text-secondary);
+
+        }
+
+
+
+        .mapping-badge {
+
+            font-size: 0.72rem;
+
+            font-weight: 700;
+
+            padding: 0.25rem 0.5rem;
+
+            border-radius: 6px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            border: 1px solid transparent;
+
+            cursor: pointer;
+
+            box-shadow: var(--shadow-sm);
+
+            transition: all var(--transition-speed);
+
+        }
+
+
+
+        .mapping-badge:hover {
+
+            transform: scale(1.05);
+
+            box-shadow: var(--shadow-md);
+
+        }
+
+
+
+        .mapping-badge.level-high {
+            background: var(--upla-cyan-10);
+            color: var(--upla-mix-30-70);
+            border-color: var(--upla-cyan-50);
+        }
+
+        .mapping-badge.level-medium {
+            background: var(--upla-cyan-pale);
+            color: var(--upla-mix-20-80);
+            border-color: var(--upla-cyan-30);
+        }
+
+        .mapping-badge.level-low {
+            background: var(--upla-black-pale);
+            color: var(--upla-black-70);
+            border-color: var(--upla-black-30);
+        }
+
+        /* Biologia (Green) badges in matrix */
+        .disciplinares-std .mapping-badge.level-high {
+            background-color: var(--color-bio) !important;
+            color: #ffffff !important;
+            border-color: var(--color-bio) !important;
+        }
+        .disciplinares-std .mapping-badge.level-medium {
+            background-color: rgba(46, 125, 50, 0.7) !important;
+            color: #ffffff !important;
+            border-color: rgba(46, 125, 50, 0.7) !important;
+        }
+        .disciplinares-std .mapping-badge.level-low {
+            background-color: rgba(46, 125, 50, 0.45) !important;
+            color: #ffffff !important;
+            border-color: rgba(46, 125, 50, 0.45) !important;
+        }
+
+        /* Quimica (Yellow/Amber) badges in matrix */
+        .instrumentales-std .mapping-badge.level-high {
+            background-color: var(--color-qui) !important;
+            color: #ffffff !important;
+            border-color: var(--color-qui) !important;
+        }
+        .instrumentales-std .mapping-badge.level-medium {
+            background-color: rgba(217, 119, 6, 0.7) !important;
+            color: #ffffff !important;
+            border-color: rgba(217, 119, 6, 0.7) !important;
+        }
+        .instrumentales-std .mapping-badge.level-low {
+            background-color: rgba(217, 119, 6, 0.45) !important;
+            color: #ffffff !important;
+            border-color: rgba(217, 119, 6, 0.45) !important;
+        }
+
+        /* Fisica (Blue) badges in matrix */
+        .selloupla-std .mapping-badge.level-high {
+            background-color: var(--color-fis) !important;
+            color: #ffffff !important;
+            border-color: var(--color-fis) !important;
+        }
+        .selloupla-std .mapping-badge.level-medium {
+            background-color: rgba(29, 78, 216, 0.7) !important;
+            color: #ffffff !important;
+            border-color: rgba(29, 78, 216, 0.7) !important;
+        }
+        .selloupla-std .mapping-badge.level-low {
+            background-color: rgba(29, 78, 216, 0.45) !important;
+            color: #ffffff !important;
+            border-color: rgba(29, 78, 216, 0.45) !important;
+        }
+
+
+
+        /* Detail Sidebar Panel */
+
+        .detail-panel {
+
+            position: sticky;
+
+            top: 1.75rem;
+
+            max-height: calc(100vh - 3.5rem);
+
+            overflow-y: auto;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 1.25rem;
+
+        }
+
+
+
+        .card-detail {
+
+            background: #ffffff;
+
+            border-radius: 12px;
+
+            border: 1px solid var(--border-color);
+
+            padding: 1.5rem;
+
+            box-shadow: var(--shadow-sm);
+
+        }
+
+
+
+        .card-detail-title {
+
+            font-size: 1.05rem;
+
+            font-weight: 700;
+
+            margin-bottom: 0.8rem;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+            border-bottom: 1px solid var(--border-color);
+
+            padding-bottom: 0.5rem;
+
+            color: var(--text-primary);
+
+        }
+
+
+
+        .detail-item {
+
+            margin-bottom: 1rem;
+
+            font-size: 0.85rem;
+
+            line-height: 1.45;
+
+        }
+
+
+
+        .detail-label {
+
+            font-weight: 700;
+
+            color: var(--text-muted);
+
+            margin-bottom: 0.3rem;
+
+            text-transform: uppercase;
+
+            font-size: 0.7rem;
+
+            letter-spacing: 0.05em;
+
+        }
+
+
+
+        .detail-value {
+
+            color: var(--text-primary);
+
+        }
+
+
+
+        .info-box {
+            background: var(--upla-cyan-10);
+            border-left: 4px solid var(--upla-cyan);
+            padding: 0.9rem 1.1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: var(--upla-mix-30-70);
+        }
+
+
+
+        /* Search styling */
+
+        .search-container {
+
+            position: relative;
+
+            width: 100%;
+
+            max-width: 320px;
+
+        }
+
+
+
+        .search-input {
+
+            width: 100%;
+
+            background: #f1f5f9;
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 10px;
+
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+
+            font-size: 0.85rem;
+
+            color: var(--text-primary);
+
+            transition: all var(--transition-speed);
+
+        }
+
+
+
+        .search-input:focus {
+
+            outline: none;
+
+            background: #ffffff;
+
+            border-color: #94a3b8;
+
+            box-shadow: var(--shadow-md);
+
+        }
+
+
+
+        .search-icon {
+
+            position: absolute;
+
+            left: 0.85rem;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 16px;
+
+            height: 16px;
+
+            color: var(--text-muted);
+
+            pointer-events: none;
+
+        }
+
+
+
+        /* Pillars & Sello Box */
+
+        .identity-box {
+
+            background: #ffffff;
+
+            border: 1px solid var(--border-color);
+
+            border-radius: 16px;
+
+            padding: 1.75rem;
+
+            box-shadow: var(--shadow-md);
+
+        }
+
+
+
+        .identity-title {
+
+            font-size: 1.25rem;
+
+            color: var(--text-primary);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.6rem;
+
+            border-bottom: 1px solid var(--border-color);
+
+            padding-bottom: 0.75rem;
+
+            margin-bottom: 1.25rem;
+
+        }
+
+
+
+        .identity-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 1.5rem;
+
+        }
+
+
+
+        .identity-item {
+
+            font-size: 0.85rem;
+
+            line-height: 1.5;
+
+            color: var(--text-secondary);
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 0.4rem;
+
+        }
+
+
+
+        .identity-item strong {
+
+            color: var(--text-primary);
+
+            font-size: 0.9rem;
+
+            font-weight: 700;
+
+        }
+
+
+
+        /* Modal design */
+
+        .modal-overlay {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: rgba(15, 23, 42, 0.6);
+
+            backdrop-filter: blur(8px);
+
+            z-index: 1000;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+
+        .modal-content {
+
+            background: #ffffff;
+
+            border-radius: 20px;
+
+            border: 1px solid var(--border-color);
+
+            width: 90%;
+
+            max-width: 850px;
+
+            max-height: 85vh;
+
+            display: flex;
+
+            flex-direction: column;
+
+            box-shadow: var(--shadow-lg);
+
+            overflow: hidden;
+
+            animation: modalFadeIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+        }
+
+
+
+        @keyframes modalFadeIn {
+
+            from { transform: scale(0.95); opacity: 0; }
+
+            to { transform: scale(1); opacity: 1; }
+
+        }
+
+
+
+        .modal-header {
+
+            padding: 1.25rem 2rem;
+
+            border-bottom: 1px solid var(--border-color);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            background: #f8fafc;
+
+        }
+
+
+
+        .modal-title {
+
+            font-size: 1.3rem;
+
+            font-weight: 800;
+
+            color: var(--text-primary);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.6rem;
+
+        }
+
+
+
+        .modal-close-btn {
+
+            background: transparent;
+
+            border: none;
+
+            font-size: 1.75rem;
+
+            font-weight: bold;
+
+            color: var(--text-muted);
+
+            cursor: pointer;
+
+            width: 36px;
+
+            height: 36px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transition: all var(--transition-speed);
+
+        }
+
+
+
+        .modal-close-btn:hover {
+
+            background: #e2e8f0;
+
+            color: var(--text-primary);
+
+            transform: rotate(90deg);
+
+        }
+
+
+
+        .modal-body {
+
+            padding: 2rem;
+
+            overflow-y: auto;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 1.25rem;
+
+        }
+
+
+
+        .modal-standard-item {
+
+            padding: 1.2rem 1.5rem;
+
+            background: #f8fafc;
+
+            border-radius: 12px;
+
+            border: 1px solid var(--border-color);
+
+            border-left: 5px solid var(--color-bio);
+
+            box-shadow: var(--shadow-sm);
+
+        }
+
+
+
+        .modal-standard-item.qui-accent { border-left-color: var(--color-qui); }
+
+        .modal-standard-item.fis-accent { border-left-color: var(--color-fis); }
+
+
+
+        .modal-standard-title {
+
+            font-size: 1rem;
+
+            font-weight: 700;
+
+            margin-bottom: 0.5rem;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            color: var(--text-primary);
+
+        }
+
+
+
+        .modal-standard-desc {
+
+            font-size: 0.88rem;
+
+            line-height: 1.5;
+
+            color: var(--text-secondary);
+
+        }
+
+    
+        /* Print Styles for A3 Landscape PDF */
+        @media print {
+            @page {
+                size: A3 landscape;
+                margin: 10mm;
+            }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                min-height: auto !important;
+            }
+            header, 
+            .guide-panel, 
+            .controls-row, 
+            .detail-panel, 
+            .identity-box, 
+            .accordion-root, 
+            .accordion-tabs,
+            footer,
+            #standards-modal {
+                display: none !important;
+            }
+            .malla-scroller {
+                overflow: visible !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .malla-grid {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                gap: 0.4rem !important;
+                width: 100% !important;
+                padding-bottom: 0 !important;
+            }
+            .sem-column {
+                flex: 1 1 0% !important;
+                min-width: 0 !important;
+                gap: 0.4rem !important;
+            }
+            .sem-header {
+                font-size: 0.7rem !important;
+                padding: 0.4rem 0.2rem !important;
+                border-radius: 6px !important;
+            }
+            .course-card-container {
+                height: 95px !important;
+            }
+            .course-card {
+                box-shadow: none !important;
+                border: 1px solid #cbd5e1 !important;
+                border-radius: 8px !important;
+            }
+            .card-front {
+                padding: 0.4rem !important;
+                gap: 0.25rem !important;
+            }
+            .course-name {
+                font-size: 0.58rem !important;
+                line-height: 1.2 !important;
+            }
+            .course-footer {
+                font-size: 0.5rem !important;
+            }
+            .sem-sum {
+                font-size: 0.7rem !important;
+                padding: 0.4rem !important;
+                border-radius: 6px !important;
+            }
+            .malla-divider {
+                margin: 0 0.2rem !important;
+                width: 1px !important;
+                flex: 0 0 1px !important;
+            }
+            .divider-line {
+                border-left-width: 1.5px !important;
+            }
+            .divider-label {
+                bottom: -2.8rem !important;
+                font-size: 0.52rem !important;
+                padding: 0.15rem 0.4rem !important;
+                border-radius: 4px !important;
+                border-width: 1px !important;
+            }
+        }
+    
+</style>
+
+</head>
+
+<body>
+
+
+
+<div class="container">
+
+    <!-- Header -->
+
+    <header>
+
+        <div class="header-title-container">
+
+            <h1>Sello Instrumental y Farmacia (Plan 2027)</h1>
+
+            <p>Estructura Curricular y Tributación de Estándares Profesionales</p>
+
+        </div>
+
+        <div class="header-badges">
+
+            <span class="badge active">
+
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+
+                Máx 6 Cursos/Semestre
+
+            </span>
+
+            <span class="badge badge-sct">
+
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+
+                Total: <span id='total-sct-badge'>300</span> SCT
+
+            </span>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- Guide Panel (Interactive & Autoexplicativo) -->
+
+    <div class="guide-panel">
+
+        <div class="guide-header">
+
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-bio);"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+
+            <h3>Guía Interactiva: ¿Cómo explorar esta Malla Curricular?</h3>
+
+        </div>
+
+        <p class="guide-subtitle">
+
+            Esta plataforma interactiva está diseñada para proyectores en modo pantalla completa. Muestra de forma directa y transparente cómo la carrera de <strong>Química y Farmacia (Plan 2027)</strong>, apoyada por la investigación científica avanzada del <strong>HUB Ambiental</strong>, cumple con los estándares disciplinares del Mineduc (logrando un 100% de cobertura, superando el 80% mínimo legal).
+
+        </p>
+
+        <div class="guide-steps">
+
+            <div class="guide-step-card step-active-bio" id="guide-step-1">
+
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+
+                    <span class="guide-step-badge">1</span>
+
+                    <span style="font-size:0.65rem; font-weight:800; text-transform:uppercase; color:var(--color-bio);">Filtro Curricular</span>
+
+                </div>
+
+                <div class="guide-step-title">Alterna Disciplina Activa</div>
+
+                <div class="guide-step-desc">Usa el selector para cambiar entre <strong>Disciplinar, Sello Instrumental o Sello UPLA</strong>. Toda la plataforma (cálculos, malla, matriz y acordeón) se reconfigurará al instante.</div>
+
+            </div>
+
+            <div class="guide-step-card step-active-qui" id="guide-step-2">
+
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+
+                    <span class="guide-step-badge">2</span>
+
+                    <span style="font-size:0.65rem; font-weight:800; text-transform:uppercase; color:var(--color-qui);">Giro 3D</span>
+
+                </div>
+
+                <div class="guide-step-title">Haz clic en una Asignatura</div>
+
+                <div class="guide-step-desc">Haz <strong>un clic</strong> en cualquier asignatura de la malla para rotarla en 3D. El reverso revelará los códigos de estándares, keywords y porcentajes.</div>
+
+            </div>
+
+            <div class="guide-step-card step-active-fis" id="guide-step-3">
+
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+
+                    <span class="guide-step-badge">3</span>
+
+                    <span style="font-size:0.65rem; font-weight:800; text-transform:uppercase; color:var(--color-fis);">Cruce Cruzado</span>
+
+                </div>
+
+                <div class="guide-step-title">Haz clic en la Matriz</div>
+
+                <div class="guide-step-desc">Selecciona un estándar o asignatura en la matriz para ver su desglose literal oficial en tiempo real en el <strong>panel lateral interactivo</strong>.</div>
+
+            </div>
+
+            <div class="guide-step-card" id="guide-step-4" style="border-left: 4px solid var(--color-cierre);">
+
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+
+                    <span class="guide-step-badge" style="background:var(--color-cierre);">4</span>
+
+                    <span style="font-size:0.65rem; font-weight:800; text-transform:uppercase; color:var(--color-cierre);">Justificaciones</span>
+
+                </div>
+
+                <div class="guide-step-title">Revisa los Desplegables</div>
+
+                <div class="guide-step-desc">Al pie de la malla, abre los acordeones para revisar el fundamento didáctico detallado: <strong>¿por qué y cómo?</strong> cada curso tributa a cada estándar.</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    <!-- Stats Grid (Clickable to view modal) -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-info">
+
+                <h3>Cobertura General</h3>
+
+                <p>100%</p>
+
+                <span style="font-size: 0.65rem; color: var(--color-bio); font-weight: 700;">Meta: 80% (Cumplida)</span>
+
+            </div>
+
+            <div class="stat-icon" style="color: var(--color-bio); background: var(--color-bio-glow);">
+
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card clickable" onclick="openStandardsModal('disciplinares')">
+
+            <div class="stat-info">
+
+                <h3>Competencias Disciplinares</h3>
+
+                <p>7 / 7</p>
+
+                <span style="font-size: 0.65rem; color: var(--color-bio); font-weight: 700;">Hacer clic para ver detalle literal</span>
+
+            </div>
+
+            <div class="stat-icon" style="color: var(--color-bio); background: var(--color-bio-glow);">
+
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 6v12M6 12h12"></path></svg>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card clickable" onclick="openStandardsModal('instrumentales')">
+
+            <div class="stat-info">
+
+                <h3>Sello Instrumental</h3>
+
+                <p>6 / 6</p>
+
+                <span style="font-size: 0.65rem; color: var(--color-qui); font-weight: 700;">Hacer clic para ver detalle literal</span>
+
+            </div>
+
+            <div class="stat-icon" style="color: var(--color-qui); background: var(--color-qui-glow);">
+
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card clickable" onclick="openStandardsModal('selloupla')">
+
+            <div class="stat-info">
+
+                <h3>Sello UPLA</h3>
+
+                <p>6 / 6</p>
+
+                <span style="font-size: 0.65rem; color: var(--color-fis); font-weight: 700;">Hacer clic para ver detalle literal</span>
+
+            </div>
+
+            <div class="stat-icon" style="color: var(--color-fis); background: var(--color-fis-glow);">
+
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zM6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path></svg>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Controls Row (Discipline Selector) -->
+
+    <div class="controls-row">
+
+        <div class="selector-group">
+
+            <span class="selector-label">Disciplina Activa:</span>
+
+            <div class="discipline-selector">
+
+                <button class="discipline-btn active" data-discipline="disciplinares">Disciplinar</button>
+
+                <button class="discipline-btn" data-discipline="instrumentales">Sello Instrumental</button>
+
+                <button class="discipline-btn" data-discipline="selloupla">Sello UPLA</button>
+
+            </div>
+
+        </div>
+
+        <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">
+
+            Ajuste Lateral de Pantalla Completa Activo ⛶
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Coverage and compliance calculation panel (INTERACTIVE PANEL WITH EXPLANATORY LABELS) -->
+
+    <div class="panel" style="overflow: visible;">
+
+        <div class="panel-header" style="margin-bottom:0.6rem;">
+
+            <h2 class="panel-title">
+
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+
+                Verificación de Cumplimiento Normativo (Criterio Mineduc: Mínimo 80% Cobertura)
+
+            </h2>
+
+        </div>
+
+        
+
+        <div class="calc-grid">
+
+            <!-- Left sub-box: Progress bar showing the 80% mark -->
+
+            <div class="progress-container">
+
+                <div class="progress-label-row">
+
+                    <span>Cobertura Curricular Disciplinar</span>
+
+                    <span id="pct-label-text" style="color:var(--color-bio);">100%</span>
+
+                </div>
+
+                <div class="progress-track">
+
+                    <div class="progress-bar-fill" id="progress-fill-bar"></div>
+
+                    <div class="progress-threshold-marker"></div>
+
+                    <div class="progress-threshold-label">Meta Mínima (80%)</div>
+
+                </div>
+
+                <div style="font-size:0.75rem; text-align:center; color:var(--text-secondary); margin-top:0.4rem; font-weight:600;" id="progress-summary-text">
+
+                    La carrera cubre la totalidad de los estándares en esta área.
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Right sub-box: Step-by-step math algorithm breakdown -->
+
+            <div class="calc-steps">
+
+                <div class="calc-steps-title">Fórmula de Acreditación Curricular (Mineduc)</div>
+
+                <div class="steps-container">
+
+                    <div class="step-box">
+
+                        <div class="step-val" id="step-n">7</div>
+
+                        <div class="step-lbl">Estándares en la Disciplina</div>
+
+                        <span class="step-helper">Fijos en el PDF oficial</span>
+
+                    </div>
+
+                    <div class="step-box" style="border-color: var(--upla-black-30); background: var(--upla-black-pale);">
+                    <div class="step-val" id="step-req" style="color: var(--upla-black-70);">6</div>
+
+                        <div class="step-lbl">Mínimo Requerido (80%)</div>
+
+                        <span class="step-helper">Fórmula: N × 0.8</span>
+
+                    </div>
+
+                    <div class="step-box" style="border-color: var(--upla-cyan-50); background: var(--upla-cyan-10);">
+                    <div class="step-val" id="step-cov" style="color: var(--upla-cyan);">7</div>
+
+                        <div class="step-lbl">Cubiertos en la Malla</div>
+
+                        <span class="step-helper">Logrado por asignaturas</span>
+
+                    </div>
+
+                    <div class="step-box" style="background: var(--upla-cyan); border-color: var(--upla-cyan);">
+                    <div class="step-val" style="color: #ffffff;" id="step-status">100%</div>
+                    <div class="step-lbl" style="color: #ffffff; font-weight: 700;">¡CUMPLIDO!</div>
+                    <span class="step-helper" style="color: #ffffff; font-weight: 600;">Sello de Aprobación</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Visual Malla Curricular Panel -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <h2 class="panel-title">
+
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>
+
+                    Malla Curricular Horizontal (Equilibrada en 30 SCT/semestre, Máx 6 Cursos/sem)
+
+                </h2>
+
+                <p class="panel-subtitle">Haz clic en una asignatura para <strong>invertir la tarjeta</strong> y ver sus estándares. Doble clic para reiniciar giros.</p>
+
+            </div>
+
+            <button onclick="flipAllCardsBack()" style="background:#f1f5f9; border:1px solid var(--border-color); color:var(--text-secondary); padding:0.4rem 0.8rem; border-radius:8px; font-size:0.75rem; font-weight:600; cursor:pointer;">Reiniciar Tarjetas ↩</button>
+
+        </div>
+
+
+
+        <div class="legend-container">
+
+            <div class="legend-item"><span class="legend-color" style="background: var(--color-instrumental);"></span>Instrumental y Complementaria</div>
+
+            <div class="legend-item"><span class="legend-color" style="background: var(--color-practicas);"></span>Línea de Prácticas</div>
+
+            <div class="legend-item"><span class="legend-color" style="background: var(--color-cierre);"></span>Línea de Cierre y Sello</div>
+
+            <div class="legend-item"><span class="legend-color" style="background: var(--color-pedagogica);"></span>Formación Pedagógica</div>
+
+            <div class="legend-item"><span class="legend-color" style="background: var(--color-basicas-bq);"></span>Ciencias Básicas: Disciplinar y Sello Instrumental</div>
+
+            <div class="legend-item"><span class="legend-color" style="background: var(--color-basicas-fa);"></span>Ciencias Básicas: Sello UPLA y Aplicadas</div>
+
+            <div class="legend-item"><span class="legend-color" style="background: var(--color-sello);"></span>Sociedad, Medioambiente y Sellos</div>
+
+        </div>
+
+
+
+        <div class="malla-scroller">
+
+            <div class="malla-grid" id="malla-grid">
+
+                <!-- Generado dinámicamente -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Accordion Section (Fundamentos Pedagógicos) -->
+
+    <div class="accordion-panel">
+
+        <div class="panel-header" style="margin-bottom:0.75rem;">
+
+            <div>
+
+                <h2 class="panel-title">
+
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+
+                    Fundamentos Pedagógicos: ¿Por qué y cómo tributa cada asignatura a los estándares?
+
+                </h2>
+
+                <p class="panel-subtitle">Haz clic sobre cualquiera de los estándares de egreso a continuación para expandirlo y revisar las asignaturas asociadas y la justificación técnica de su aporte curricular.</p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Tab selector specifically for Accordion -->
+
+        <div class="accordion-tab-container" id="accordion-tabs">
+
+            <button class="accordion-tab active" data-tab="disciplinares" onclick="setAccordionTab('disciplinares')">Estándares Disciplinar</button>
+
+            <button class="accordion-tab" data-tab="instrumentales" onclick="setAccordionTab('instrumentales')">Estándares Sello Instrumental</button>
+
+            <button class="accordion-tab" data-tab="selloupla" onclick="setAccordionTab('selloupla')">Estándares Sello UPLA</button>
+
+        </div>
+
+        
+
+        <div class="accordion-container" id="accordion-root">
+
+            <!-- Rellenado dinámicamente según la disciplina seleccionada -->
+
+        </div>
+
+    </div>
+
+    
+
+    <!-- Matrix Section (Stacked below Accordion) -->
+
+    <div class="matrix-section">
+
+        <!-- Left panel: Matrix table -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2 class="panel-title">
+
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+
+                        Matriz de Cruce Cruzado (Cátedras vs Estándares)
+
+                    </h2>
+
+                    <p class="panel-subtitle">Haz clic en un estándar o en una asignatura para aislar sus relaciones en el panel lateral.</p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="controls-row" style="border:none; padding:0; margin-bottom:0.8rem; background:transparent; display:flex; justify-content:space-between; align-items:center;">
+                <div class="search-container">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" class="search-input" id="search-box" placeholder="Buscar asignatura en la matriz..." oninput="handleSearch()">
+                </div>
+                <div class="selector-group" style="margin-left: auto; display: flex; align-items: center; gap: 0.75rem;">
+                    <span class="selector-label" style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary);">Filtrar Matriz:</span>
+                    <div class="discipline-selector">
+                        <button class="discipline-btn active" data-discipline="disciplinares">Disciplinar</button>
+                        <button class="discipline-btn" data-discipline="instrumentales">Sello Instrumental</button>
+                        <button class="discipline-btn" data-discipline="selloupla">Sello UPLA</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="matrix-container">
+
+                <table class="matrix-table" id="matrix-table">
+
+                    <thead>
+
+                        <tr id="matrix-header-row">
+
+                            <!-- Dinámico -->
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="matrix-body">
+
+                        <!-- Dinámico -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Right panel: Sticky Sidebar information -->
+
+        <div class="detail-panel">
+
+            <div class="panel" style="height:auto;">
+
+                <h2 class="panel-title" style="margin-bottom: 0.8rem; flex-shrink:0;">
+
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+
+                    Detalle Curricular Seleccionado
+
+                </h2>
+
+
+
+                <div id="welcome-detail" class="card-detail">
+
+                    <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary);">
+
+                        Selecciona una fila de estándar o una cabecera de asignatura en la matriz de cruce para visualizar su desglose literal completo aquí.
+
+                    </p>
+
+                </div>
+
+
+
+                <div id="info-detail" style="display:none; overflow-y:auto; padding-right:0.2rem;">
+
+                    <!-- Dinámico -->
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Career Identity info (from Leandro's Proposal PPTX) -->
+
+    <div class="identity-box">
+
+        <h3 class="identity-title">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M14.5 9.5a2.5 2.5 0 0 1-5 0"></path><path d="M12 14v4"></path></svg>
+
+            Pilares e Identidad de la Propuesta Curricular
+
+        </h3>
+
+        <div class="identity-grid">
+
+            <div class="identity-item">
+
+                <strong>Sello de Sostenibilidad y Territorio</strong>
+
+                Integración de Disciplinar, Sello Instrumental y Sello UPLA bajo un prisma ecológico orientado a la resolución de problemáticas locales y globales (Cambio Climático, Biorremediación, CTS).
+
+            </div>
+
+            <div class="identity-item">
+
+                <strong>Infraestructura Tecnológica Avanzada</strong>
+
+                Soporte directo del HUB Ambiental y laboratorios bajo normativa ISO 17025, garantizando formación científica experimental y de investigación de estándar mundial.
+
+            </div>
+
+            <div class="identity-item">
+
+                <strong>Optimización de Recursos (Sin Costo Adicional)</strong>
+
+                Aprovechamiento total de los académicos y plantas físicas existentes de la Facultad de Ciencias. No requiere nuevas contrataciones para su puesta en marcha.
+
+            </div>
+
+            <div class="identity-item">
+
+                <strong>Equilibrio 30 SCT Semestral</strong>
+
+                Curriculum balanceado a 30 créditos SCT exactos por semestre, garantizando una carga académica saludable y alta tasa de titulación oportuna.
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- Modal for Standard Details (Literal text display) -->
+
+<div class="modal-overlay" id="standards-modal" onclick="closeStandardsModal()">
+
+    <div class="modal-content" onclick="event.stopPropagation()">
+
+        <div class="modal-header">
+
+            <h2 class="modal-title" id="modal-discipline-title">Estándares Oficiales</h2>
+
+            <button class="modal-close-btn" onclick="closeStandardsModal()">×</button>
+
+        </div>
+
+        <div class="modal-body" id="modal-standards-list">
+
+            <!-- Rellenado dinámicamente -->
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+    // Data Model
+
+    // Sello Instrumental y Farmacia 2027 Data Model
+const standards = {
+    disciplinares: [
+        { id: "Dis_CD1", title: "Ciencias Farmacéuticas y Bioquímico-Clínicas (CD1)", desc: "Integra los fundamentos de las ciencias químicas, biológicas y farmacéuticas en el análisis, diagnóstico y monitoreo de procesos biológicos y químicos, utilizando técnicas e instrumentación especializada en laboratorios clínicos y de análisis químico, para asegurar resultados confiables que contribuyan al diagnóstico y monitoreo en el ámbito de la salud y el medioambiente." },
+        { id: "Dis_CD2", title: "Atención Farmacéutica y Farmacia Clínica / Asistencial (CD2)", desc: "Gestiona la farmacoterapia y la atención farmacéutica en los ámbitos asistencial, comunitario y de salud pública, integrando equipos de salud multidisciplinarios, para promover el uso racional de los medicamentos y optimizar los resultados en salud y calidad de vida de las personas." },
+        { id: "Dis_CD3", title: "Tecnología Farmacéutica, Cosmética e Industrial (CD3)", desc: "Diseña procesos de formulación, manufactura y control de calidad de productos farmacéuticos, cosméticos y sanitarios a nivel piloto e industrial, coordinando su implementación bajo estándares reguladores y normativas nacionales e internacionales vigentes, para asegurar el suministro de productos eficaces, seguros y de alta calidad." },
+        { id: "Dis_CD4", title: "Gestión de Calidad, Regulación y Bioética (CD4)", desc: "Aplica el marco regulatorio sanitario, las directrices bioéticas y los sistemas de aseguramiento de calidad en la gestión y administración de establecimientos farmacéuticos, cosméticos y alimentarios, para asegurar la legalidad, seguridad e inocuidad de los productos y procesos en beneficio de la salud de la población." },
+        { id: "Dis_CPE1", title: "Práctica Profesional e Investigación Aplicada (CPE1)", desc: "Resuelve problemáticas complejas de la profesión farmacéutica en el entorno asistencial, comunitario o industrial, mediante el diseño y ejecución de proyectos de investigación aplicada y prácticas profesionales autónomas basadas en el método científico, para contribuir a la innovación y el desarrollo de la salud pública." }
+    ],
+    instrumentales: [
+        { id: "Ins_CI1", title: "Comunicación y Tecnologías Digitales (CI1)", desc: "Comunica de forma efectiva ideas, propuestas y resultados del ámbito científico-farmacéutico de forma oral, escrita y multimodal, tanto en español como en inglés, utilizando herramientas digitales y tecnologías de la información, para desempeñarse eficazmente en diversos contextos académicos, profesionales y sociales." },
+        { id: "Ins_CI2", title: "Pensamiento Crítico y Análisis Científico (CI2)", desc: "Evalúa información científica, epidemiológica y bioestadística de la especialidad mediante el pensamiento crítico y la revisión sistemática de fuentes de información confiables, para fundamentar la toma de decisiones profesionales y la resolución de problemas en salud pública." }
+    ],
+    selloupla: [
+        { id: "Sel_CS1", title: "Responsabilidad Social y Ciudadanía (CS1)", desc: "Transforma problemáticas sociosanitarias y de salud pública en su entorno, asumiendo principios de responsabilidad social ética y participación ciudadana activa, para promover el bien común, la justicia distributiva y el bienestar de su comunidad." },
+        { id: "Sel_CS2", title: "Derechos Humanos, Diversidad y Género (CS2)", desc: "Promueve la inclusión, la equidad de género y el respeto de la dignidad humana en el ejercicio de su profesión y en su interacción comunitaria, bajo un enfoque de derechos humanos, para contribuir a la erradicación de barreras asistenciales y al fortalecimiento de una sociedad democrática." }
+    ]
+};
+
+const keywords = {
+    Dis_CD1: "Cs. Farmacéuticas",
+    Dis_CD2: "Atenc. Farmacéutica",
+    Dis_CD3: "Tecnología Farmac.",
+    Dis_CD4: "Gestión y Regulación",
+    Dis_CPE1: "Práctica e Investig.",
+    Ins_CI1: "Comun. y Tecnol.",
+    Ins_CI2: "Pensamiento Crítico",
+    Sel_CS1: "Responsab. Social",
+    Sel_CS2: "DDHH y Género"
+};
+
+const asignaturas = [
+  {
+    "sem": 1,
+    "name": "Quimica General (incluye Lab)",
+    "sct": 8,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 80,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 1,
+    "name": "Disciplinar Celular (incluye Lab)",
+    "sct": 8,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 80,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 1,
+    "name": "Álgebra e Introducción al Cálculo",
+    "sct": 5,
+    "area": "basicas_fa",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 70
+    }
+  },
+  {
+    "sem": 1,
+    "name": "Introducción a las Cs. Farmacéuticas",
+    "sct": 4,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 1,
+    "name": "Comunicación Academica",
+    "sct": 3,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 1,
+    "name": "TIC para vida Academica",
+    "sct": 2,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 2,
+    "name": "Sello Instrumental General II (incluye Lab)",
+    "sct": 6,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 80,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 2,
+    "name": "Biologia Molecular y Lab",
+    "sct": 6,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 80,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 2,
+    "name": "Matemáticas 2 (Cálculo)",
+    "sct": 6,
+    "area": "basicas_fa",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 70
+    }
+  },
+  {
+    "sem": 2,
+    "name": "SELLO UPLA",
+    "sct": 6,
+    "area": "sello",
+    "coverage": {
+      "Sel_CS1": 50,
+      "Sel_CS2": 50
+    }
+  },
+  {
+    "sem": 2,
+    "name": "Comunicacion oral y escrita en espanol",
+    "sct": 3,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 2,
+    "name": "El mundo de los medicamentos",
+    "sct": 3,
+    "area": "disciplinar",
+    "coverage": {
+      "Dis_CD2": 90,
+      "Dis_CD1": 50
+    }
+  },
+  {
+    "sem": 3,
+    "name": "Sello Instrumental Orgánica I",
+    "sct": 6,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 3,
+    "name": "Morfología (Anatomía-Histología)",
+    "sct": 6,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 3,
+    "name": "Sello Instrumental Analítica I",
+    "sct": 8,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 3,
+    "name": "Microbiología e Inmunología",
+    "sct": 4,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 3,
+    "name": "Bioquímica",
+    "sct": 3,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 3,
+    "name": "Lengua Extranjera (Inglés) - Nivel Elemental",
+    "sct": 3,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 4,
+    "name": "Sello Instrumental Orgánica II",
+    "sct": 6,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 4,
+    "name": "Fisiología Humana I",
+    "sct": 6,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 4,
+    "name": "Sello Instrumental Analítica II",
+    "sct": 7,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 4,
+    "name": "Fisicoquímica Farmacéutica",
+    "sct": 5,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 4,
+    "name": "Farmacodinamia",
+    "sct": 3,
+    "area": "disciplinar",
+    "coverage": {
+      "Dis_CD2": 90,
+      "Dis_CD1": 50
+    }
+  },
+  {
+    "sem": 4,
+    "name": "Lengua Extranjera (Inglés) - Nivel Básico",
+    "sct": 3,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 5,
+    "name": "Análisis Instrumental",
+    "sct": 5,
+    "area": "disciplinar",
+    "coverage": {
+      "Dis_CD1": 80
+    }
+  },
+  {
+    "sem": 5,
+    "name": "Fisiología Humana II",
+    "sct": 6,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 5,
+    "name": "Botánica y Farmacognosia",
+    "sct": 5,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 5,
+    "name": "Farmacoquímica y Análisis de Medicamentos I",
+    "sct": 6,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 5,
+    "name": "Farmacología I",
+    "sct": 5,
+    "area": "disciplinar",
+    "coverage": {
+      "Dis_CD2": 90,
+      "Dis_CD1": 50
+    }
+  },
+  {
+    "sem": 5,
+    "name": "Inglés Técnico-Científico - Nivel Básico Superior",
+    "sct": 3,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 6,
+    "name": "Farmacología II",
+    "sct": 5,
+    "area": "disciplinar",
+    "coverage": {
+      "Dis_CD2": 90,
+      "Dis_CD1": 50
+    }
+  },
+  {
+    "sem": 6,
+    "name": "Farmacoquímica y Análisis de Medicamentos II",
+    "sct": 5,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 6,
+    "name": "Tecnología Farmacéutica I",
+    "sct": 7,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 6,
+    "name": "Fisiopatología",
+    "sct": 5,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 6,
+    "name": "Farmacocinética",
+    "sct": 5,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 6,
+    "name": "Área de Formación Complementaria",
+    "sct": 3,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI2": 80
+    }
+  },
+  {
+    "sem": 7,
+    "name": "Bioquímica Clínica",
+    "sct": 7,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 40
+    }
+  },
+  {
+    "sem": 7,
+    "name": "Tecnología Farmacéutica II",
+    "sct": 8,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 7,
+    "name": "Farmacología Clínica",
+    "sct": 6,
+    "area": "disciplinar",
+    "coverage": {
+      "Dis_CD2": 90,
+      "Dis_CD1": 50
+    }
+  },
+  {
+    "sem": 7,
+    "name": "Salud Pública y Epidemiología",
+    "sct": 3,
+    "area": "disciplinar",
+    "coverage": {
+      "Dis_CD2": 90,
+      "Dis_CD1": 50
+    }
+  },
+  {
+    "sem": 7,
+    "name": "Gestión y Control de Calidad",
+    "sct": 3,
+    "area": "disciplinar",
+    "coverage": {
+      "Dis_CD4": 90
+    }
+  },
+  {
+    "sem": 7,
+    "name": "Bioestadística",
+    "sct": 3,
+    "area": "basicas_bq",
+    "coverage": {
+      "Dis_CD1": 60,
+      "Ins_CI2": 70
+    }
+  },
+  {
+    "sem": 8,
+    "name": "Bromatología",
+    "sct": 6,
+    "area": "disciplinar",
+    "coverage": {
+      "Dis_CD3": 90,
+      "Dis_CD1": 50
+    }
+  },
+  {
+    "sem": 8,
+    "name": "Farmacia Asistencial",
+    "sct": 6,
+    "area": "disciplinar",
+    "coverage": {
+      "Dis_CD2": 90,
+      "Dis_CD1": 50
+    }
+  },
+  {
+    "sem": 8,
+    "name": "Tecnología Cosmética",
+    "sct": 6,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 8,
+    "name": "Biofarmacia y Farmacocinética Clínica",
+    "sct": 4,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 8,
+    "name": "Gestión y Adm. Farmacéutica",
+    "sct": 3,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 8,
+    "name": "Área de Formación Complementaria",
+    "sct": 3,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI2": 80
+    }
+  },
+  {
+    "sem": 9,
+    "name": "Memoria de Titulo 1",
+    "sct": 15,
+    "area": "cierre",
+    "coverage": {
+      "Dis_CPE1": 100
+    }
+  },
+  {
+    "sem": 9,
+    "name": "Practica Profesional",
+    "sct": 15,
+    "area": "instrumental",
+    "coverage": {
+      "Ins_CI1": 90
+    }
+  },
+  {
+    "sem": 10,
+    "name": "Memoria de Titulo 2",
+    "sct": 30,
+    "area": "cierre",
+    "coverage": {
+      "Dis_CPE1": 100
+    }
+  }
+];
+
+const justifications = {
+  "Dis_CD1": {
+    "Quimica General (incluye Lab)": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Disciplinar Celular (incluye Lab)": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Álgebra e Introducción al Cálculo": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Sello Instrumental General II (incluye Lab)": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Biologia Molecular y Lab": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Matemáticas 2 (Cálculo)": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "El mundo de los medicamentos": "Sustenta la toma de decisiones clínicas en las bases físico-químicas de los fármacos.",
+    "Sello Instrumental Orgánica I": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Morfología (Anatomía-Histología)": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Microbiología e Inmunología": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Bioquímica": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Sello Instrumental Orgánica II": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Fisiología Humana I": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Fisicoquímica Farmacéutica": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Farmacodinamia": "Sustenta la toma de decisiones clínicas en las bases físico-químicas de los fármacos.",
+    "Análisis Instrumental": "Aplica saberes específicos de las ciencias farmacéuticas a problemas de la especialidad.",
+    "Fisiología Humana II": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Botánica y Farmacognosia": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Farmacoquímica y Análisis de Medicamentos I": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Farmacología I": "Sustenta la toma de decisiones clínicas en las bases físico-químicas de los fármacos.",
+    "Farmacología II": "Sustenta la toma de decisiones clínicas en las bases físico-químicas de los fármacos.",
+    "Farmacoquímica y Análisis de Medicamentos II": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Fisiopatología": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Bioquímica Clínica": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Farmacología Clínica": "Sustenta la toma de decisiones clínicas en las bases físico-químicas de los fármacos.",
+    "Salud Pública y Epidemiología": "Sustenta la toma de decisiones clínicas en las bases físico-químicas de los fármacos.",
+    "Bioestadística": "Aplica conceptos de ciencias básicas para la comprensión y análisis de procesos químicos y biológicos.",
+    "Bromatología": "Aplica análisis químico e instrumental para evaluar la calidad de los productos.",
+    "Farmacia Asistencial": "Sustenta la toma de decisiones clínicas en las bases físico-químicas de los fármacos."
+  },
+  "Dis_CD2": {
+    "El mundo de los medicamentos": "Gestiona la farmacoterapia y la atención del paciente promoviendo el uso racional de medicamentos.",
+    "Farmacodinamia": "Gestiona la farmacoterapia y la atención del paciente promoviendo el uso racional de medicamentos.",
+    "Farmacología I": "Gestiona la farmacoterapia y la atención del paciente promoviendo el uso racional de medicamentos.",
+    "Farmacología II": "Gestiona la farmacoterapia y la atención del paciente promoviendo el uso racional de medicamentos.",
+    "Farmacología Clínica": "Gestiona la farmacoterapia y la atención del paciente promoviendo el uso racional de medicamentos.",
+    "Salud Pública y Epidemiología": "Gestiona la farmacoterapia y la atención del paciente promoviendo el uso racional de medicamentos.",
+    "Farmacia Asistencial": "Gestiona la farmacoterapia y la atención del paciente promoviendo el uso racional de medicamentos."
+  },
+  "Dis_CD3": {
+    "Bromatología": "Diseña y optimiza procesos de manufactura y control de calidad de productos farmacéuticos y cosméticos."
+  },
+  "Dis_CD4": {
+    "Gestión y Control de Calidad": "Aplica normativas sanitarias y sistemas de aseguramiento de calidad en establecimientos farmacéuticos."
+  },
+  "Dis_CPE1": {
+    "Memoria de Titulo 1": "Resuelve problemas profesionales en terreno aplicando el método científico y criterios bioéticos.",
+    "Memoria de Titulo 2": "Resuelve problemas profesionales en terreno aplicando el método científico y criterios bioéticos."
+  },
+  "Ins_CI1": {
+    "Introducción a las Cs. Farmacéuticas": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Comunicación Academica": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "TIC para vida Academica": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Comunicacion oral y escrita en espanol": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Sello Instrumental Analítica I": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Lengua Extranjera (Inglés) - Nivel Elemental": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Sello Instrumental Analítica II": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Lengua Extranjera (Inglés) - Nivel Básico": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Inglés Técnico-Científico - Nivel Básico Superior": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Tecnología Farmacéutica I": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Farmacocinética": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Tecnología Farmacéutica II": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Tecnología Cosmética": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Biofarmacia y Farmacocinética Clínica": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Gestión y Adm. Farmacéutica": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales.",
+    "Practica Profesional": "Desarrolla habilidades comunicativas en contextos académicos y profesionales utilizando medios digitales."
+  },
+  "Ins_CI2": {
+    "Quimica General (incluye Lab)": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Disciplinar Celular (incluye Lab)": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Álgebra e Introducción al Cálculo": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Sello Instrumental General II (incluye Lab)": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Biologia Molecular y Lab": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Matemáticas 2 (Cálculo)": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Sello Instrumental Orgánica I": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Morfología (Anatomía-Histología)": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Microbiología e Inmunología": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Bioquímica": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Sello Instrumental Orgánica II": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Fisiología Humana I": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Fisicoquímica Farmacéutica": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Fisiología Humana II": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Botánica y Farmacognosia": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Farmacoquímica y Análisis de Medicamentos I": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Farmacoquímica y Análisis de Medicamentos II": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Fisiopatología": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Área de Formación Complementaria": "Aplica el análisis científico y lógico en la resolución de problemas instrumentales.",
+    "Bioquímica Clínica": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas.",
+    "Bioestadística": "Desarrolla el pensamiento analítico mediante el uso de modelos y herramientas cuantitativas."
+  },
+  "Sel_CS1": {
+    "SELLO UPLA": "Aborda problemáticas sociales integrando los sellos de responsabilidad ética de la UPLA."
+  },
+  "Sel_CS2": {
+    "SELLO UPLA": "Fomenta la inclusión y el respeto a la diversidad en las interacciones comunitarias."
+  }
+};
+
+
+function setupDisciplineSelectors() {
+        const buttons = document.querySelectorAll('.discipline-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const disc = btn.getAttribute('data-discipline');
+                
+                // Synchronize all selectors with the selected discipline
+                buttons.forEach(b => b.classList.remove('active'));
+                document.querySelectorAll(`.discipline-btn[data-discipline="${disc}"]`).forEach(b => {
+                    b.classList.add('active');
+                });
+                
+                currentDiscipline = disc;
+                
+                selectedCourse = null;
+                selectedStandard = null;
+                
+                renderMalla();
+                renderMatrix();
+                showWelcome();
+                updateCoverageWidgets();
+                
+                // Synchronize accordion tab with active discipline
+                setAccordionTab(currentDiscipline);
+            });
+        });
+    }
+
+
+
+    // Update the coverage percentage and Mineduc 80% calculation widget
+
+    function updateCoverageWidgets() {
+
+        const total = standards[currentDiscipline].length;
+
+        
+
+        let coveredCount = 0;
+
+        standards[currentDiscipline].forEach(std => {
+
+            const hasContrib = asignaturas.some(c => {
+
+                for (const key in c.coverage) {
+
+                    if (key.toLowerCase() === std.id.toLowerCase() && c.coverage[key] > 0) {
+
+                        return true;
+
+                    }
+
+                }
+
+                return false;
+
+            });
+
+            if (hasContrib) coveredCount++;
+
+        });
+
+
+
+        const minRequired = Math.ceil(total * 0.8);
+
+        const actualPercentage = Math.round((coveredCount / total) * 100);
+
+
+
+        // Update progress bar
+
+        progressFillBar.style.width = `${actualPercentage}%`;
+
+        pctLabelText.innerText = `${actualPercentage}%`;
+
+        
+
+        // Set colors based on discipline
+
+        let activeColor = 'var(--color-bio)';
+
+        if (currentDiscipline === 'instrumentales') activeColor = 'var(--color-qui)';
+
+        if (currentDiscipline === 'selloupla') activeColor = 'var(--color-fis)';
+
+        pctLabelText.style.color = activeColor;
+
+        progressFillBar.style.background = activeColor;
+
+
+
+        // Text summary updates
+
+        progressSummaryText.innerHTML = `Se cubren <strong>${coveredCount} de ${total}</strong> estándares disciplinares (${actualPercentage}%). Meta Mineduc: 80% (${minRequired} est.).`;
+
+
+
+        // Update steps grid
+
+        stepN.innerText = total;
+
+        stepReq.innerText = minRequired;
+
+        stepCov.innerText = coveredCount;
+
+        stepStatus.innerText = `${actualPercentage}%`;
+
+    }
+
+
+
+    // Render Malla Curricular Grid
+
+    function renderMalla() {
+
+        mallaGrid.innerHTML = '';
+
+        
+
+        const semCourses = {};
+
+                for(let s = 1; s <= 10; s++) {
+            semCourses[s] = asignaturas.filter(a => a.sem === s);
+            // Sort to place Formación Instrumental first, Formación Pedagógica second, and Ciencias Básicas BQ third
+            const areaPriority = { 'instrumental': 1, 'pedagogica': 2, 'basicas_bq': 3 };
+            semCourses[s].sort((a, b) => {
+                const pA = areaPriority[a.area] || 99;
+                const pB = areaPriority[b.area] || 99;
+                return pA - pB;
+            });
+        }
+
+
+
+        for(let s = 1; s <= 10; s++) {
+
+            const col = document.createElement('div');
+
+            col.className = 'sem-column';
+
+            
+
+            const header = document.createElement('div');
+
+            header.className = 'sem-header';
+
+            header.innerText = `Sem ${s}`;
+
+            col.appendChild(header);
+
+
+
+            semCourses[s].forEach(course => {
+
+                const container = document.createElement('div');
+
+                container.className = `course-card-container area-${course.area}`;
+
+                container.setAttribute('data-name', course.name);
+
+                
+
+                const card = document.createElement('div');
+
+                card.className = 'course-card';
+
+                card.addEventListener('click', (e) => {
+
+                    card.classList.toggle('flipped');
+
+                });
+
+
+
+                // Front side
+
+                const front = document.createElement('div');
+
+                front.className = 'card-front';
+
+
+
+                const nameDiv = document.createElement('div');
+
+                nameDiv.className = 'course-name';
+
+                nameDiv.innerText = course.name;
+
+
+
+                const footer = document.createElement('div');
+
+                footer.className = 'course-footer';
+
+                
+
+                const sctSpan = document.createElement('span');
+
+                sctSpan.className = 'course-sct';
+
+                sctSpan.innerText = `${course.sct} SCT`;
+
+                
+
+                footer.appendChild(sctSpan);
+
+
+
+                const mappings = getMappingsForCourseInDiscipline(course, currentDiscipline);
+
+                if (mappings.length > 0) {
+
+                    const mappedCount = document.createElement('span');
+
+                    mappedCount.style.fontSize = '0.62rem';
+
+                    mappedCount.style.fontWeight = 'bold';
+
+                    mappedCount.style.color = getDisciplineColor(currentDiscipline);
+
+                    mappedCount.innerText = `• ${mappings.length} Est.`;
+
+                    footer.appendChild(mappedCount);
+
+                }
+
+
+
+                front.appendChild(nameDiv);
+
+                front.appendChild(footer);
+
+
+
+                // Back side (Listing mappings with keywords in parentheses)
+
+                const back = document.createElement('div');
+
+                back.className = 'card-back';
+
+
+
+                const backTitle = document.createElement('div');
+
+                backTitle.className = 'back-title';
+
+                backTitle.innerText = 'Tributación:';
+
+                back.appendChild(backTitle);
+
+
+
+                const mappingsAll = getMappingsAll(course);
+
+                if (mappingsAll.length > 0) {
+
+                    mappingsAll.forEach(m => {
+
+                        const item = document.createElement('div');
+                        const prefix = m.std.split('_')[0].toLowerCase();
+                        item.className = `back-item back-item-${prefix}`;
+
+                        const kw = keywords[m.std] || "";
+
+                        const standardShortName = m.std.split('_')[1];
+
+                        const disciplinePrefix = m.std.split('_')[0].substring(0,3).toUpperCase();
+
+                        item.innerHTML = `<span><strong>${disciplinePrefix} ${standardShortName}</strong> (${kw})</span> <span>${m.pct}%</span>`;
+
+                        back.appendChild(item);
+
+                    });
+
+                } else {
+
+                    const emptyItem = document.createElement('div');
+
+                    emptyItem.className = 'back-item empty';
+
+                    emptyItem.innerText = 'No tributa';
+
+                    back.appendChild(emptyItem);
+
+                }
+
+
+
+                card.appendChild(front);
+
+                card.appendChild(back);
+
+                container.appendChild(card);
+
+                col.appendChild(container);
+
+            });
+
+
+
+            // Semester SCT total sum
+
+            const sumDiv = document.createElement('div');
+
+            sumDiv.className = 'sem-sum';
+
+            sumDiv.innerText = '30 SCT';
+
+            col.appendChild(sumDiv);
+
+
+
+            mallaGrid.appendChild(col);
+
+            if (s === 4) {
+                const divider = document.createElement('div');
+                divider.className = 'malla-divider';
+                divider.innerHTML = `
+                    <div class="divider-line"></div>
+                    <div class="divider-label">
+                        <strong>Hito formativo</strong><br>
+                        <span style="font-size: 0.58rem; font-weight: normal; opacity: 0.95;">(evaluación de ciclo inicial)</span>
+                    </div>
+                `;
+                mallaGrid.appendChild(divider);
+            } else if (s === 8) {
+                const divider = document.createElement('div');
+                divider.className = 'malla-divider';
+                divider.innerHTML = `
+                    <div class="divider-line"></div>
+                    <div class="divider-label">
+                        <strong>Hito formativo II</strong><br>
+                        <span style="font-size: 0.58rem; font-weight: normal; opacity: 0.95;">(evaluación de ciclo intermedio)</span>
+                    </div>
+                `;
+                mallaGrid.appendChild(divider);
+            } else if (s === 10) {
+                const divider = document.createElement('div');
+                divider.className = 'malla-divider';
+                divider.innerHTML = `
+                    <div class="divider-line"></div>
+                    <div class="divider-label">
+                        <strong>Hito formativo III</strong><br>
+                        <span style="font-size: 0.58rem; font-weight: normal; opacity: 0.95;">(evaluación de ciclo final)</span>
+                    </div>
+                `;
+                mallaGrid.appendChild(divider);
+            }
+        }
+
+    }
+
+
+
+    // Switch Accordion Tab
+
+    function setAccordionTab(discipline) {
+
+        accordionDiscipline = discipline;
+
+        
+
+        // Update active class on accordion tab buttons
+
+        const tabs = document.querySelectorAll('.accordion-tab');
+
+        tabs.forEach(tab => {
+
+            if (tab.getAttribute('data-tab') === discipline) {
+
+                tab.classList.add('active');
+
+            } else {
+
+                tab.classList.remove('active');
+
+            }
+
+        });
+
+        
+
+        renderAccordion();
+
+    }
+
+
+
+    // Render the Accordion section below the Malla Curricular
+
+    function renderAccordion() {
+
+        accordionRoot.innerHTML = '';
+
+        const activeStds = standards[currentDiscipline];
+
+        
+
+        let color = 'var(--color-bio)';
+
+        if (accordionDiscipline === 'instrumentales') color = 'var(--color-qui)';
+
+        if (accordionDiscipline === 'selloupla') color = 'var(--color-fis)';
+
+
+
+        activeStds.forEach(std => {
+
+            const item = document.createElement('div');
+
+            item.className = 'accordion-item';
+
+            
+
+            // Header
+
+            const header = document.createElement('div');
+
+            header.className = 'accordion-header';
+
+            header.addEventListener('click', () => {
+
+                const isOpen = item.classList.contains('open');
+
+                // Close all others
+
+                document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('open'));
+
+                if (!isOpen) {
+
+                    item.classList.add('open');
+
+                }
+
+            });
+
+
+
+            const shortLetter = std.id.split('_')[1];
+
+            
+
+            const titleSpan = document.createElement('div');
+
+            titleSpan.className = 'accordion-header-title';
+
+            titleSpan.innerHTML = `<span style="background:${color}; color:white; font-size:0.75rem; padding:0.15rem 0.45rem; border-radius:4px;">Estándar ${shortLetter}</span> <span>${std.title}</span>`;
+
+            
+
+            const iconSpan = document.createElement('span');
+
+            iconSpan.className = 'accordion-icon';
+
+            iconSpan.innerHTML = '▶';
+
+
+
+            header.appendChild(titleSpan);
+
+            header.appendChild(iconSpan);
+
+
+
+            // Content
+
+            const content = document.createElement('div');
+
+            content.className = 'accordion-content';
+
+
+
+            const descBox = document.createElement('div');
+
+            descBox.className = 'accordion-desc-box';
+
+            descBox.style.borderLeftColor = color;
+
+            descBox.innerHTML = `<strong>Descripción Literal Oficial:</strong><br>${std.desc}`;
+
+            content.appendChild(descBox);
+
+
+
+            // Fetch course mappings and justifications
+
+            const coursesList = document.createElement('div');
+
+            coursesList.className = 'accordion-courses-list';
+
+
+
+            const matchingCourses = asignaturas.filter(c => {
+
+                for (const key in c.coverage) {
+
+                    if (key.toLowerCase() === std.id.toLowerCase() && c.coverage[key] > 0) return true;
+
+                }
+
+                return false;
+
+            });
+
+
+
+            if (matchingCourses.length > 0) {
+
+                matchingCourses.forEach(c => {
+
+                    const row = document.createElement('div');
+
+                    row.className = 'accordion-course-row';
+
+
+
+                    const cName = document.createElement('div');
+
+                    cName.className = 'accordion-course-name';
+
+                    cName.innerHTML = `<span style="width:8px; height:8px; border-radius:50%; background:var(--color-${c.area}); display:inline-block;"></span> ${c.name} (Sem ${c.sem})`;
+
+                    
+
+                    const cWhy = document.createElement('div');
+
+                    cWhy.className = 'accordion-course-why';
+
+                    
+
+                    // Fetch justification from database
+
+                    let whyText = "Aporta competencias experimentales y didácticas específicas vinculadas al estándar.";
+
+                    if (justifications[std.id] && justifications[std.id][c.name]) {
+
+                        whyText = justifications[std.id][c.name];
+
+                    }
+
+                    
+
+                    cWhy.innerHTML = `<strong>Justificación:</strong> ${whyText} <span style="font-weight:bold; color: ${c.coverage[std.id] >= 80 ? 'var(--upla-cyan)' : 'var(--text-secondary)'}; margin-left:5px;">[Logro: ${c.coverage[std.id]}%]</span>`;
+
+
+
+                    row.appendChild(cName);
+
+                    row.appendChild(cWhy);
+
+                    coursesList.appendChild(row);
+
+                });
+
+            } else {
+
+                const empty = document.createElement('div');
+
+                empty.style.color = 'var(--text-muted)';
+
+                empty.style.fontSize = '0.8rem';
+
+                empty.innerText = 'No hay asignaturas asociadas a este estándar en esta disciplina.';
+
+                coursesList.appendChild(empty);
+
+            }
+
+
+
+            content.appendChild(coursesList);
+
+            item.appendChild(header);
+
+            item.appendChild(content);
+
+            accordionRoot.appendChild(item);
+
+        });
+
+    }
+
+
+
+    // Get all mappings for back of cards
+
+    function getMappingsAll(course) {
+
+        const list = [];
+
+        for (const key in course.coverage) {
+
+            list.push({ std: key, pct: course.coverage[key] });
+
+        }
+
+        return list;
+
+    }
+
+
+
+    // Flip all cards back to front
+
+    function flipAllCardsBack() {
+
+        document.querySelectorAll('.course-card').forEach(card => {
+
+            card.classList.remove('flipped');
+
+        });
+
+    }
+
+
+
+    // Render Matrix Table
+
+    function renderMatrix() {
+
+        matrixHeaderRow.innerHTML = '';
+
+        matrixBody.innerHTML = '';
+
+
+
+        const activeStds = standards[currentDiscipline];
+
+        
+
+        // Header
+
+        const thStd = document.createElement('th');
+
+        thStd.innerText = 'Código';
+
+        thStd.style.width = '70px';
+
+        matrixHeaderRow.appendChild(thStd);
+
+
+
+        const thDesc = document.createElement('th');
+
+        thDesc.innerText = 'Estándar Profesional';
+
+        thDesc.style.width = '300px';
+
+        matrixHeaderRow.appendChild(thDesc);
+
+
+
+        const filteredAsignaturas = asignaturas.filter(a => {
+
+            const hasMappings = getMappingsForCourseInDiscipline(a, currentDiscipline).length > 0;
+
+            const matchesSearch = a.name.toLowerCase().includes(searchFilter.toLowerCase());
+
+            return hasMappings && matchesSearch;
+
+        });
+
+
+
+        filteredAsignaturas.forEach(course => {
+
+            const th = document.createElement('th');
+
+            th.innerText = course.name;
+
+            th.style.fontSize = '0.72rem';
+
+            th.style.textAlign = 'center';
+
+            th.style.writingMode = 'vertical-rl';
+
+            th.style.transform = 'rotate(180deg)';
+
+            th.style.padding = '1rem 0.4rem 0.4rem 0.4rem';
+
+            th.style.whiteSpace = 'nowrap';
+
+            th.style.maxWidth = '35px';
+
+            th.style.cursor = 'pointer';
+
+            
+
+            th.addEventListener('click', () => {
+
+                selectCourse(course);
+
+                highlightConnectionsForCourse(course);
+
+            });
+
+            
+
+            matrixHeaderRow.appendChild(th);
+
+        });
+
+
+
+        // Rows for standards
+
+        activeStds.forEach(std => {
+
+            const tr = document.createElement('tr');
+
+            tr.className = `matrix-row ${currentDiscipline}-std`;
+
+            tr.setAttribute('data-std', std.id);
+
+            
+
+            tr.addEventListener('mouseenter', () => highlightConnectionsForStandard(std.id));
+
+            tr.addEventListener('mouseleave', resetHighlights);
+
+            tr.addEventListener('click', () => selectStandard(std));
+
+
+
+            const tdId = document.createElement('td');
+
+            tdId.className = 'standard-id-col';
+
+            tdId.innerText = std.id.split('_')[1];
+
+            tr.appendChild(tdId);
+
+
+
+            const tdDesc = document.createElement('td');
+
+            tdDesc.className = 'standard-desc-col';
+
+            tdDesc.innerHTML = `<strong>${std.title}</strong><div style="font-size:0.75rem; margin-top:0.1rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${std.desc}</div>`;
+
+            tr.appendChild(tdDesc);
+
+
+
+            // Matrix cells
+
+            filteredAsignaturas.forEach(course => {
+
+                const td = document.createElement('td');
+
+                td.style.textAlign = 'center';
+
+                
+
+                let val = 0;
+
+                for (const key in course.coverage) {
+
+                    if (key.toLowerCase() === std.id.toLowerCase()) {
+
+                        val = course.coverage[key];
+
+                        break;
+
+                    }
+
+                }
+
+
+
+                if (val > 0) {
+
+                    const badge = document.createElement('span');
+
+                    let levelClass = 'level-low';
+
+                    if (val >= 80) levelClass = 'level-high';
+
+                    else if (val >= 50) levelClass = 'level-medium';
+
+
+
+                    badge.className = `mapping-badge ${levelClass}`;
+
+                    badge.innerText = `${val}%`;
+
+                    
+
+                    badge.addEventListener('click', (e) => {
+
+                        e.stopPropagation();
+
+                        showMappingDetail(course, std, val);
+
+                    });
+
+
+
+                    td.appendChild(badge);
+
+                } else {
+
+                    td.innerText = '-';
+
+                    td.style.color = 'var(--text-muted)';
+
+                }
+
+
+
+                tr.appendChild(td);
+
+            });
+
+
+
+            matrixBody.appendChild(tr);
+
+        });
+
+    }
+
+
+
+    // Helper functions for mapping check
+
+    function getMappingsForCourseInDiscipline(course, discipline) {
+
+        const list = [];
+
+        for (const key in course.coverage) {
+
+            if (key.toLowerCase().startsWith(discipline.substring(0, 3).toLowerCase())) {
+
+                list.push({ std: key, pct: course.coverage[key] });
+
+            }
+
+        }
+
+        return list;
+
+    }
+
+
+
+    function getDisciplineColor(discipline) {
+
+        if (discipline === 'disciplinares') return 'var(--color-bio)';
+
+        if (discipline === 'instrumentales') return 'var(--color-qui)';
+
+        return 'var(--color-fis)';
+
+    }
+
+
+
+    // Search filtration
+
+    function handleSearch() {
+
+        searchFilter = searchBox.value;
+
+        renderMatrix();
+
+    }
+
+
+
+    // Interactive Hover highlights
+
+    function highlightConnectionsForCourse(course) {
+
+        document.querySelectorAll('.matrix-row').forEach(row => {
+
+            const stdId = row.getAttribute('data-std');
+
+            let maps = false;
+
+            for (const key in course.coverage) {
+
+                if (key.toLowerCase() === stdId.toLowerCase() && course.coverage[key] > 0) {
+
+                    maps = true;
+
+                    break;
+
+                }
+
+            }
+
+            if (maps) row.classList.add('highlighted');
+
+            else row.classList.remove('highlighted');
+
+        });
+
+    }
+
+
+
+    function highlightConnectionsForStandard(stdId) {
+
+        const row = document.querySelector(`.matrix-row[data-std="${stdId}"]`);
+
+        if (row) row.classList.add('highlighted');
+
+    }
+
+
+
+    // Clear highlights on mouse leave
+
+    function resetHighlights() {
+
+        if (selectedCourse || selectedStandard) return;
+
+        document.querySelectorAll('.matrix-row').forEach(row => {
+
+            row.classList.remove('highlighted');
+
+        });
+
+    }
+
+
+
+    function selectCourse(course) {
+
+        welcomeDetail.style.display = 'none';
+
+        infoDetail.style.display = 'block';
+
+
+
+        const mappings = getMappingsForCourseInDiscipline(course, currentDiscipline);
+
+        
+
+        let mappingsHTML = '';
+
+        if (mappings.length > 0) {
+
+            mappingsHTML = mappings.map(m => {
+
+                const stdObj = standards[currentDiscipline].find(s => s.id === m.std);
+
+                return `
+
+                    <div style="margin-top: 0.4rem; padding: 0.5rem; background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; border-left: 3px solid ${getDisciplineColor(currentDiscipline)};">
+
+                        <strong style="color: ${getDisciplineColor(currentDiscipline)};">${m.std.split('_')[1]}: ${stdObj ? stdObj.title : ''}</strong>
+
+                        <span style="float: right; font-weight: bold; color: ${m.pct >= 80 ? 'var(--upla-cyan)' : 'var(--text-secondary)'};">${m.pct}% Cobertura</span>
+
+                    </div>
+
+                `;
+
+            }).join('');
+
+        } else {
+
+            mappingsHTML = `<p style="font-size: 0.8rem; color: var(--text-secondary);">Esta asignatura no tiene estándares disciplinares en esta área.</p>`;
+
+        }
+
+
+
+        infoDetail.innerHTML = `
+
+            <div class="card-detail" style="background:#ffffff;">
+
+                <div class="card-detail-title">
+
+                    <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-${course.area}); display: inline-block;"></span>
+
+                    ${course.name}
+
+                </div>
+
+                <div class="detail-item">
+
+                    <div class="detail-label">Ubicación Curricular</div>
+
+                    <div class="detail-value">Semestre ${course.sem} | Eje Formativo: <span style="text-transform: capitalize;">${course.area.replace('_', ' ')}</span></div>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <div class="detail-label">Carga Académica</div>
+
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: bold; color: var(--upla-cyan);">${course.sct} Créditos SCT</div>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <div class="detail-label">Estándares Profesionales (${currentDiscipline.toUpperCase()})</div>
+
+                    ${mappingsHTML}
+
+                </div>
+
+                <button onclick="clearActiveSelections()" style="width: 100%; margin-top: 0.8rem; background: #f1f5f9; border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.4rem; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 600;">
+
+                    Limpiar Selección
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+
+    function selectStandard(std) {
+
+        clearActiveSelections();
+
+        selectedStandard = std;
+
+        
+
+        const row = document.querySelector(`.matrix-row[data-std="${std.id}"]`);
+
+        if (row) row.classList.add('highlighted');
+
+        
+
+        welcomeDetail.style.display = 'none';
+
+        infoDetail.style.display = 'block';
+
+
+
+        const matchingCourses = asignaturas.filter(c => {
+
+            for (const key in c.coverage) {
+
+                if (key.toLowerCase() === std.id.toLowerCase() && c.coverage[key] > 0) return true;
+
+            }
+
+            return false;
+
+        });
+
+
+
+        const coursesHTML = matchingCourses.map(c => {
+
+            const pct = c.coverage[std.id];
+
+            return `
+
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.35rem 0.5rem; margin-top: 0.3rem; background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0;">
+
+                    <span style="font-size: 0.75rem; font-weight: 500;">${c.name} (Sem ${c.sem})</span>
+
+                    <span style="font-size: 0.75rem; font-weight: bold; color: ${pct >= 80 ? 'var(--upla-cyan)' : 'var(--text-secondary)'};">${pct}%</span>
+
+                </div>
+
+            `;
+
+        }).join('');
+
+
+
+        infoDetail.innerHTML = `
+
+            <div class="card-detail" style="background:#ffffff;">
+
+                <div class="card-detail-title" style="color: ${getDisciplineColor(currentDiscipline)};">
+
+                    Estándar ${std.id.split('_')[1]}: ${std.title}
+
+                </div>
+
+                <div class="detail-item">
+
+                    <div class="detail-label">Descripción Oficial del Estándar</div>
+
+                    <div class="detail-value" style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4;">${std.desc}</div>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <div class="detail-label">Asignaturas que lo Trabajan (${matchingCourses.length})</div>
+
+                    ${coursesHTML || '<p style="color: var(--text-secondary); font-size:0.75rem;">Ninguna asignatura curricular trabaja este estándar.</p>'}
+
+                </div>
+
+                <button onclick="clearActiveSelections()" style="width: 100%; margin-top: 0.8rem; background: #f1f5f9; border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.4rem; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 600;">
+
+                    Limpiar Selección
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+
+    function showMappingDetail(course, std, val) {
+
+        clearActiveSelections();
+
+        welcomeDetail.style.display = 'none';
+
+        infoDetail.style.display = 'block';
+
+
+
+        infoDetail.innerHTML = `
+
+            <div class="card-detail" style="border-color: ${getDisciplineColor(currentDiscipline)}; background:#ffffff;">
+
+                <div class="card-detail-title" style="border:none; margin:0; padding:0; color:var(--text-primary);">
+
+                    Nivel de Cobertura Específico
+
+                </div>
+
+                <div style="font-size: 1.8rem; font-weight: 800; text-align: center; margin: 1rem 0; color: ${val >= 80 ? 'var(--upla-cyan)' : 'var(--text-secondary)'};">
+
+                    ${val}%
+
+                </div>
+
+                <div class="detail-item">
+
+                    <div class="detail-label">Asignatura</div>
+
+                    <div class="detail-value">${course.name} (Semestre ${course.sem}, ${course.sct} SCT)</div>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <div class="detail-label">Estándar Profesional</div>
+
+                    <div class="detail-value"><strong>${std.id}: ${std.title}</strong><br><span style="font-size:0.75rem; color:var(--text-secondary);">${std.desc}</span></div>
+
+                </div>
+
+                <div class="info-box">
+
+                    Representa el nivel de profundización temática contemplado para este estándar específico en las cátedras.
+
+                </div>
+
+                <button onclick="clearActiveSelections()" style="width: 100%; margin-top: 0.8rem; background: #f1f5f9; border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.4rem; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 600;">
+
+                    Volver
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+
+    function clearActiveSelections() {
+
+        selectedCourse = null;
+
+        selectedStandard = null;
+
+        resetHighlights();
+
+        showWelcome();
+
+    }
+
+
+
+    // Toggle back to welcome state
+
+    function showWelcome() {
+
+        welcomeDetail.style.display = 'block';
+
+        infoDetail.style.display = 'none';
+
+    }
+
+
+
+    // Modal Control functions
+
+    function openStandardsModal(discipline) {
+
+        const titleMap = {
+
+            disciplinares: "Competencias Disciplinares",
+
+            instrumentales: "Competencias Sello Instrumental",
+
+            selloupla: "Competencias Sello UPLA",
+
+        };
+
+        const accentMap = {
+
+            disciplinares: "",
+
+            instrumentales: "qui-accent",
+
+            selloupla: "fis-accent"
+
+        };
+
+
+
+        document.getElementById('modal-discipline-title').innerText = titleMap[discipline];
+
+        const listDiv = document.getElementById('modal-standards-list');
+
+        listDiv.innerHTML = '';
+
+
+
+        standards[discipline].forEach(std => {
+
+            const item = document.createElement('div');
+
+            item.className = `modal-standard-item ${accentMap[discipline]}`;
+
+            
+
+            const title = document.createElement('div');
+
+            title.className = 'modal-standard-title';
+
+            const standardLetter = std.id.split('_')[1];
+
+            
+
+            let color = 'var(--color-bio)';
+
+            if (discipline === 'instrumentales') color = 'var(--color-qui)';
+
+            if (discipline === 'selloupla') color = 'var(--color-fis)';
+
+
+
+            title.innerHTML = `<span style="color:${color};">Estándar ${standardLetter}</span> <span>${std.title}</span>`;
+
+            
+
+            const desc = document.createElement('div');
+
+            desc.className = 'modal-standard-desc';
+
+            desc.innerText = std.desc;
+
+
+
+            item.appendChild(title);
+
+            item.appendChild(desc);
+
+            listDiv.appendChild(item);
+
+        });
+
+
+
+        standardsModal.style.display = 'flex';
+
+    }
+
+
+
+    // Close Modal
+
+    function closeStandardsModal() {
+
+        standardsModal.style.display = 'none';
+
+    }
+
+
+
+    // Run on load
+
+    window.addEventListener('DOMContentLoaded', init);
+
+</script>
+
+
+
+</body>
+
+</html>
+
