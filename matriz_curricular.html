@@ -4066,7 +4066,32 @@ const justifications = {
 };;
 
 
-function init() {
+let currentDiscipline = 'disciplinares';
+    let accordionDiscipline = 'disciplinares';
+    let selectedCourse = null;
+    let selectedStandard = null;
+    let searchFilter = "";
+
+    // DOM Elements
+    const mallaGrid = document.getElementById('malla-grid');
+    const matrixHeaderRow = document.getElementById('matrix-header-row');
+    const matrixBody = document.getElementById('matrix-body');
+    const welcomeDetail = document.getElementById('welcome-detail');
+    const infoDetail = document.getElementById('info-detail');
+    const searchBox = document.getElementById('search-box');
+    const standardsModal = document.getElementById('standards-modal');
+    const accordionRoot = document.getElementById('accordion-root');
+
+    // Coverage widget elements
+    const progressFillBar = document.getElementById('progress-fill-bar');
+    const pctLabelText = document.getElementById('pct-label-text');
+    const progressSummaryText = document.getElementById('progress-summary-text');
+    const stepN = document.getElementById('step-n');
+    const stepReq = document.getElementById('step-req');
+    const stepCov = document.getElementById('step-cov');
+    const stepStatus = document.getElementById('step-status');
+
+    function init() {
         setupDisciplineSelectors();
         renderMalla();
         renderMatrix();
